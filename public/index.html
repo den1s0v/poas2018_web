@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Regexp tester</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js"></script>
+</head>
+<body>
+    <!-- h1+.container>(.regexp-container>h2{Type regexp here}+textarea)+(.samples>.sample*5>input+.answer.no-match) -->
+
+    <h1>Regexp tester</h1>
+    <div class="container">
+        <div class="regexp-container">
+            <h2>Type regexp here</h2>
+            <textarea class="input" id="regexp-text" placeholder="/regexp?/"></textarea>
+        </div>
+        <button id="add-sample">Add sample</button>
+        <button id="first-sample">First sample</button>
+        <button id="second-sample">Second sample</button>
+        <button id="save-on-server">Save on server</button>
+        
+        <h2>Samples:</h2>
+        <div class="samples">
+            <!-- <div class="sample">
+                <input class="input sample-input" type="text">
+                <div class="answer no-match">No match</div>
+            </div>             -->
+        </div>
+    </div>
+
+</body>
+</html>
+
+

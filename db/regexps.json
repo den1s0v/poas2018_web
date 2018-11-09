@@ -1,0 +1,11 @@
+[
+    {
+        "regexp": "a+b*c{1,2}",
+        "samples": ["aaaaaa", "abbbbcc", "bbccccccc"],
+        "editable": true
+    },
+    {
+        "regexp": "a+b*c",
+        "samples": ["aaaaaa", "abbbbcc", "bbccccccc", "sadasdasd"]
+    }
+]

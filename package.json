@@ -1,0 +1,26 @@
+{
+  "name": "part1",
+  "version": "1.0.0",
+  "description": "",
+  "main": "big-java-app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js",
+    "gulp": "gulp"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "browser-sync": "^2.24.7",
+    "gulp": "^4.0.0",
+    "nodemon": "^1.18.4"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "jsonwebtoken": "^8.3.0",
+    "mime": "^2.3.1",
+    "mongodb": "^3.1.6",
+    "path-to-regexp": "^2.4.0"
+  }
+}
