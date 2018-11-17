@@ -2,7 +2,9 @@ module.exports = {
   secret: "supersecretpassword",
   mongoURL: ((process.env.NODE_ENV === 'production') ?         
     'mongodb://test:test123456@ds249623.mlab.com:49623' :
-    'mongodb://localhost'),
+    // 'mongodb://localhost'
+    'mongodb://vds84.server-1.biz:21'
+	),
   mongodbName: ((process.env.NODE_ENV === 'production') ? 
     'heroku_prt0vjhf' :
     'web_regexp'),
