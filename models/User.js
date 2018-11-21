@@ -36,7 +36,7 @@ class User extends Model {
 
   async update({ userId, login }, newUserData) {
     try {
-      const userWithID = await this.collection.findOne({ _id: new objectId(userId) });
+      const userWithID = await this.collection.findOne({ _id: new objectId(userId) }); // objectId - объект айдишника в монго, userId - строка
       if (userWithID) {
         if (newUserData.password) {
           if (userWithID.login === login && !bcryptjs.compareSync(newUserData.password, userWithID.passwordHash)) {
