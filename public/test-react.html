@@ -7,19 +7,21 @@
     <title>Test React</title>
     <link rel="stylesheet" href="style.css">
 
-  <!-- Load React. -->
+  <!-- Load Babel. -->
+	<script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+	
   <!-- Note: when deploying, replace "development.js" with "production.min.js". -->
   <script defer src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
   <script defer src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
 
+  <!-- Load our React component. -->
+  <script defer type="text/babel" src="like_button.js"></script>
+  
    <!-- defer:  после загрузки страницы -->
 </head>
 <body>
     <!-- <h1>Testing  React</h1> -->
 	<div id="like_button_container"></div>
 
-  <!-- Load our React component. -->
-  <!-- Place after div  -->
-  <script defer src="like_button.js"></script>
 </body>
 </html>
