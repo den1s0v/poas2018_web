@@ -33,8 +33,9 @@ gulp.task('browser-sync-init', done => {
     done();
 })
 
-gulp.task('default', gulp.series('nodemon', 'browser-sync-init', () => {
+gulp.task('default', gulp.series('nodemon', 'browser-sync-init', "build-html", () => {
     gulp.watch(`${publicDir}/**/*.*`)
         .on('change', (path) => browserSync.reload(path))
         .on('add', browserSync.reload)
+    gulp.watch(`${appDir}/**/*.html`, gulp.series("build-html"))
 }))
