@@ -82,5 +82,7 @@ Webpack получает корневой файл на вход и по зависимостям из него выполняет сборк
 
 
 > npm i -D webpack
+> npm i -D webpack-cli
 
-civnote./
+civnote.ru/projects/web/wiki/Введение_в_ ...
+
