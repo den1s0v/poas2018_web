@@ -21,21 +21,21 @@ module.exports = {
       },
       isAdmin: {
         type: 'boolean'
-      }
+      },
       samples: {
         type: 'array',
 		items: {
 		  bsonType: 'objectId', // bsonType - типы для монго-ДБ (bson вместо json)
-		  uniqueItems: true;
+		  uniqueItems: true
 		}
-      }
+      },
       doneSamples: {
         type: 'array',
 		items: {
 		  bsonType: 'objectId',
-		  uniqueItems: true;
+		  uniqueItems: true
 		}
-      }
+      },
       rating: {
         type: 'number'
       }
