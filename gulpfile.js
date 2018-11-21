@@ -7,6 +7,7 @@ const chokidar = require('chokidar');
 const serverPort = 4000;
 const proxyPort = 3000;
 const publicDir = './public';
+const appDir = './src';
 
 gulp.task('nodemon', done => {
     nodemon('--inspect --ignore public/ --ignore node_modules/ --ignore gulpfile.js server.js --port ' + serverPort);    
@@ -16,6 +17,12 @@ gulp.task('nodemon', done => {
             browserSync.reload();
         }, 1000)
     })
+})
+
+// копировать все html файлы из src/ в public/
+gulp.task('build-html', () => {
+    return gulp.src(`${appDir}/**/*.html`)
+		.pipe(gulp.dest(publicDir));
 })
 
 gulp.task('browser-sync-init', done => {
