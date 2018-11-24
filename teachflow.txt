@@ -86,3 +86,15 @@ Webpack получает корневой файл на вход и по зависимостям из него выполняет сборк
 
 civnote.ru/projects/web/wiki/Введение_в_ ...
 
+24.11.2018
+========
+
+installation babel
+babel.io?
+\See http://babeljs.io/docs/usage/cli/ for setup instructions.
+install presets for babel
+...
+npm i -D @babel/cli
+
+Webpack bundles only filed into one, Babel translates JS code into older versions only.
+We use them together.
