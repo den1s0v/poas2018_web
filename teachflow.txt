@@ -94,7 +94,20 @@ babel.io?
 \See http://babeljs.io/docs/usage/cli/ for setup instructions.
 install presets for babel
 ...
-npm i -D @babel/cli
+npm i -D @babel<*>
+/cli
+/core
+/polyfill
+/preset-env
+/preset-react
+
+,
+babel-loader # loads to translate .js model
+
+
 
 Webpack bundles only filed into one, Babel translates JS code into older versions only.
 We use them together.
+
+also 
+npm i react react-dom

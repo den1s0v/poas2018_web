@@ -1,3 +1,11 @@
-import { sayHello } from "./module.js";
+//import { sayHello } from "./module.js";
 
-console.log(sayHello("John"));
+import ReactDOM from "react-dom";
+import React from "react";
+
+ReactDOM.render(
+  <h1>Hello,world!</h1>,
+  document.findElementById("root"); // our <div>
+);
+
+//console.log(sayHello("John"));
