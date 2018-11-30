@@ -3,6 +3,8 @@ const gulp = require('gulp');
 const browserSync = require('browser-sync').create();
 const nodemon = require('nodemon');
 const chokidar = require('chokidar');
+const webpackStream = require('webpack-stream');
+const webpackConfig = require("./webpack.config");
 
 const serverPort = 4000;
 const proxyPort = 3000;

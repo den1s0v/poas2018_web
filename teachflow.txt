@@ -111,3 +111,10 @@ We use them together.
 
 also 
 npm i react react-dom
+
+2 processes for gulp & webpack in terminals.
+Moving to webpack
+npm i -D webpack-stream
+
+npm i -D style-loader css-loader
+- importing css styles to .js files
