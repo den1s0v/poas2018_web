@@ -118,3 +118,39 @@ npm i -D webpack-stream
 
 npm i -D style-loader css-loader
 - importing css styles to .js files
+
+
+==============================
+1/12/2018
+
+// автоматически сгенерировать приложение на React
+
+npx create-react-app react-test
+
+
+package.json:
+: указания бабелю о поддерживаемых браузерах
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
+
+: Линтовщик: контроль стилистики кода и пре-компилировочный анализ кода ()
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+
+: serviceWorker: технология кешировать всё веб-приложение целиком,
+	а также кешировать запросы к серверу (в режиме оффлайн)
+	
+manifest: для иконок рабочего стола на андроиде
+
+* pva-приложение : на все платформы сразу
+https://whatwebcando.today
+
+* webpack-dev-server: виртуализирует файлы проекта (в виртуальной памяти)
+
+
+npm run build : построить проект для загрузки на статический сервер
