@@ -30,19 +30,25 @@ class App extends Component {
 	this.state = {  // встроенная React-переменная
 	  showUser: false
 	}
+	// workaround this.toggleUser call #1
+	// this.toggleUser = this.toggleUser.bind(this)
   }
 
-  toggleUser() {
+  // toggleUser() {
+    // this.setState({showUser: !this.state.showUser});
+  // }
+  // workaround this.toggleUser call #2
+  toggleUser = () => {
     this.setState({showUser: !this.state.showUser});
   }
   
   render() {
     return (
       <div className="App">
-        <UserInfo show name="Vasya" info={{surname:"Pupkin", adress:"Volg"}} callback={text => <small>{text}</small>} />
+        <UserInfo show={this.state.showUser} name="Vasya" info={{surname:"Pupkin", adress:"Volg"}} callback={text => <small>{text}</small>} />
 		State: {this.state.showUser + ''}
 		<br />
-		<Button variant="pink" size="super-size">ToggleButton</Button>
+		<Button onClick={ this.toggleUser } variant="pink" size="super-size">ToggleButton</Button>
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
           <p>
