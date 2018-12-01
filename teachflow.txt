@@ -149,6 +149,7 @@ manifest: для иконок рабочего стола на андроиде
 
 * pva-приложение : на все платформы сразу
 https://whatwebcando.today
+* react-native: парсит и преобразовывает в native компоненты
 
 * webpack-dev-server: виртуализирует файлы проекта (в виртуальной памяти)
 
@@ -163,7 +164,7 @@ jsx jsx ... jsx  { js code => value }  jsx jsx ... jsx
 3 commits ...
 
 
-React Bootstrap:
+React Bootstrap: react-bootstrap.netlify.com/
 
 npm install react-bootstrap@next bootstrap
 
@@ -181,3 +182,9 @@ button.btn-pink { ... }
 .mystyle {
  <...> !important;
 }
+
+
+* react-router 
+(github -> docs https://reacttraining.com/react-router/web/guides/quick-start )
+
+npm install react-router-dom 
