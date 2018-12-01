@@ -6,7 +6,7 @@ import { Button } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.css'
 
 // функциональный компонент
-function ComponentName(props) {
+function UserInfo(props) {
 console.log(props);
   return (
     (props.show) ? (
@@ -22,12 +22,26 @@ console.log(props);
 
 }
 
-// компонент-класс
+// компонент-класс : может хранить состояние
 class App extends Component {
+  constructor(props) {
+    super(props);
+	
+	this.state = {  // встроенная React-переменная
+	  showUser: false
+	}
+  }
+
+  toggleUser() {
+    this.setState({showUser: !this.state.showUser});
+  }
+  
   render() {
     return (
       <div className="App">
-        <ComponentName show name="Vasya" info={{surname:"Pupkin", adress:"Volg"}} callback={text => <small>{text}</small>} />
+        <UserInfo show name="Vasya" info={{surname:"Pupkin", adress:"Volg"}} callback={text => <small>{text}</small>} />
+		State: {this.state.showUser + ''}
+		<br />
 		<Button variant="pink" size="super-size">ToggleButton</Button>
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
