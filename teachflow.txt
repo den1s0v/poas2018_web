@@ -168,3 +168,16 @@ React Bootstrap:
 npm install react-bootstrap@next bootstrap
 
 В React все компоненты начинаются с большой буквы!
+
+поднятие специфичности для переопределения стилей другими (своими)
+
+.btn-pink =>
+
+button.btn-pink { ... }
+.btn-pink.btn-pink.btn-pink.btn-pink { ... }
+
+переопределение стилей, описанных на самом элементе стилем класса:
+
+.mystyle {
+ <...> !important;
+}

@@ -30,3 +30,13 @@
     transform: rotate(360deg);
   }
 }
+
+
+button.btn-pink {
+ background-color: rgb(254,149,166);
+}
+
+.btn-super-size {
+	width: 16rem;
+	height: 6rem;
+}
