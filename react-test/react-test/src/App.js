@@ -6,6 +6,7 @@ import './App.css';
 function ComponentName(props) {
 console.log(props);
   return (
+    (props.show) ? (
     <div>
 		Hello, {props.name}
 		<br />
@@ -13,6 +14,7 @@ console.log(props);
 		<br />
 		{props.callback('Message')}
     </div>
+  ) : null
   )
 
 }
@@ -22,7 +24,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-      <ComponentName name="Vasya" info={{surname:"Pupkin", adress:"Volg"}} callback={text => <small>{text}</small>} />
+      <ComponentName show name="Vasya" info={{surname:"Pupkin", adress:"Volg"}} callback={text => <small>{text}</small>} />
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
           <p>
