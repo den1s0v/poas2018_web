@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Test React</title>
+  <!-- Load Babel. -->
+	<script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+	
+  <!-- Note: when deploying, replace "development.js" with "production.min.js". -->
+  <script defer src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
+  <script defer src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+
+  <!-- Load our React component. -->
+  <script defer type="text/babel" src="like_button.js"></script>
+  
+<!-- HTML(5,4,4) loads script
+  <script src="like_button.js"></script>
+  <script  type="application/javascript" src="like_button.js"></script>
+  <script  type="text/javascript" src="like_button.js"></script> -->
+
+<!-- script ignored (not loaded)
+  <script  type="text/blablabla" src="like_button.js"></script>
+  <script  type="application/blablabla" src="like_button.js"></script>
+  <script  type="text/babel" src="like_button.js"></script> -->
+  
+   <!-- defer:  после загрузки страницы -->
+   
+   
+   <!-- имитация подгрузки неизветных элементов -->
+  <script defer type="text/typescript" src="test.ts"></script>
+  <script>
+    const tsElement = document.querySelector('script[type="text/typescript"]');
+	fetch(tsElement.src).then(response => {
+	  return response.text();
+	}).then(scriptText => { //console.log(scriptText););
+		const scriptElement = document.createElement('script');
+		scriptElement.textContent = scriptText;
+		document.head.appendChild(scriptElement)
+	});
+	
+  </script>
+</head>
+<body>
+    <!-- <h1>Testing  React</h1> -->
+	<div id="like_button_container"></div>
+
+</body>
+</html>

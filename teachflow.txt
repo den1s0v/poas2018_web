@@ -1,0 +1,88 @@
+17.11.2018
+==========
+
+meteor.com : фреймворк дл€ nodejs
+
+”становка
+https://www.meteor.com/install
+
+https://chocolatey.org/install#completely-offline-install
+<AdminShell>
+cmd>@ Set-ExecutionPolicy Bypass -Scope Process -Force; iwr https://chocolatey.org/install.ps1 -UseBasicParsing | iex
+
+cmd>choco install meteor
+(160-180 ћб)
+
+* движок V8 написан не по канонам трансл€тора (синтаксис - семантика - ...), а на огромном switch-case,
+благодар€ чему JS работает на нем очень быстро.
+
+* Express по сути не фреймворк, а библиотечка дл€ роутинга.
+
+* meteor - фреймворк "всЄ из коробки"
+  - подобные полнофункциональные (монолитные) фреймворки потихоньку загибаютс€ (идут на спад)
+  meteor: 
+  - полна€ интеграци€ с MongoDB
+  - единственный полноценный фреймворк под nodejs
+  - atmosphere.js - пакеты дл€ meteor
+
+* React - только front-end, View (js).
+	ѕосле него по попул€рности Angular и ~View~ (шаблонизаторы).
+
+  
+* GraphQL - €зык запросов к API
+	https://www.graphql.org/
+	* в обычном API часто приходитс€ добавл€ть новые точки доступа с похожим функционалом
+	* спец. €зык GraphQL позвол€ет задать только те пол€, которые нужны.
+-
+
+
+MEteor
+=\===========
+создание приложени€ типа react из шаблона
+meteor create --react todo-app
+
+.jsx - расширенный синтаксис, позвол€ющий xml-подобные вставки
+
+
+
+Babeljs.io - транслятор нового JS на старый JS для поддержки старых браузеров
+
+
+21.11.2018
+==========
+
+* JS V8 использует JIT-компил€цию дл€ ускорени€
+
+Cегодн€ немного про React (reactjs.org)
+
+—амые попул€рные CSS-libraries:
+- bootstrap
+- materialize design 	materializecss.com 	(расчитан на мобильные устр)
+- ui kit
+- semantic ui	semantic-ui.com 	react.semantic-ui.com (среднее мжд десктопными и мобильными стил€ми)
+
+reactjs.org
+–азделы сайта: >Get Started< Tutorials
+.jsx === javascript XML (XML строже, чем HTML)
+
+virtual DOM реакта -- копи€ DOM-дерева в js-объекте
+
+render() мен€ет виртуальный DOM, а потом сравнивает новый виртуальный DOM ос старым и разницу посылает (отрисовывает) в браузер.
+
+React - библиотечка дл€ работы с рендерингом html-элементов.
+React vs Angular:
+простота - полноценное "всЄ из коробки" дл€ форнтэнда
+большое комьюнити - ...
+
+
+
+* Webpack - сборщик js-модулей в 1 файл по включени€м (import преобразуетс€ в require и по ним собираетс€ воедино)
+- чтобы поом разом отправл€ть в babel
+Webpack получает корневой файл на вход и по зависимост€м из него выполн€ет сборку
+
+
+> npm i -D webpack
+> npm i -D webpack-cli
+
+civnote.ru/projects/web/wiki/¬ведение_в_ ...
+

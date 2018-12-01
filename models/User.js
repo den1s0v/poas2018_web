@@ -1,6 +1,6 @@
 // const mongodb = require('mongodb').MongoClient;
 const bcryptjs = require('bcryptjs');
-const schema = require('./schemas/user');
+const schema = require('./schemas/user-schema');
 const Model = require('../services/init-model');
 const objectId = require('mongodb').ObjectID;
 const { promiseError } = require('../services/error-helper')
@@ -36,7 +36,7 @@ class User extends Model {
 
   async update({ userId, login }, newUserData) {
     try {
-      const userWithID = await this.collection.findOne({ _id: new objectId(userId) });
+      const userWithID = await this.collection.findOne({ _id: new objectId(userId) }); // objectId - объект айдишника в монго, userId - строка
       if (userWithID) {
         if (newUserData.password) {
           if (userWithID.login === login && !bcryptjs.compareSync(newUserData.password, userWithID.passwordHash)) {
