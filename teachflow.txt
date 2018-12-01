@@ -154,3 +154,7 @@ https://whatwebcando.today
 
 
 npm run build : построить проект длЯ загрузки на статический сервер
+
+JSX:
+
+jsx jsx ... jsx  { js code => value }  jsx jsx ... jsx
