@@ -28,7 +28,7 @@ class App extends Component {
     return (
       <div className="App">
         <ComponentName show name="Vasya" info={{surname:"Pupkin", adress:"Volg"}} callback={text => <small>{text}</small>} />
-		<Button>ToggleButton</Button>
+		<Button variant="success">ToggleButton</Button>
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
           <p>
