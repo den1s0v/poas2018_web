@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import { Button } from 'react-bootstrap';
+// стили
+import 'bootstrap/dist/css/bootstrap.css'
 
 // функциональный компонент
 function ComponentName(props) {
@@ -24,7 +27,8 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-      <ComponentName show name="Vasya" info={{surname:"Pupkin", adress:"Volg"}} callback={text => <small>{text}</small>} />
+        <ComponentName show name="Vasya" info={{surname:"Pupkin", adress:"Volg"}} callback={text => <small>{text}</small>} />
+		<Button>ToggleButton</Button>
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
           <p>

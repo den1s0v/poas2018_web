@@ -158,3 +158,13 @@ npm run build : построить проект для загрузки на статический сервер
 JSX:
 
 jsx jsx ... jsx  { js code => value }  jsx jsx ... jsx
+
+
+3 commits ...
+
+
+React Bootstrap:
+
+npm install react-bootstrap@next bootstrap
+
+В React все компоненты начинаются с большой буквы!
