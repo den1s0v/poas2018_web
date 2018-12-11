@@ -192,3 +192,38 @@ npm install react-router-dom
 
 * Полиморфное приложение:
 серверный рендеринг js  на сервере и отправка чистого html клиенту
+
+
+========= 11.12.2018 ===========
+Тема: Авторизация через соцсети
+
+1. Google
+OAuth 2.0
+https://developers.google.com/identity/sign-in/web/sign-in
+	To create a Google API Console project and client ID, click the following button: ...
+	
+1) специальный jwt-токен, который возвращается формой регистрации Google
+2) нужно с сервера запросить из Google спец. ~def~ -токен, которым нужно проверить (расшифровать) первый jwt-токен
+3) рег-ем польз-дя и  выдаём ему собственный jwt-токен
+
+(пример) passportjs.org  использует "стратегии" авторизации на разных сервисах
+
+Google Console API
+https://console.developers.google.com/apis/dashboard?pli=1
+
+зарегистрировались: https://console.developers.google.com/apis/credentials/oauthclient/289814883390-vqr4kc66i7e4n5urmahi4orl79ppdrhs.apps.googleusercontent.com?project=loginservice-225211
+
+Идентификатор клиента	
+289814883390-vqr4kc66i7e4n5urmahi4orl79ppdrhs.apps.googleusercontent.com
+Секрет клиента	
+yq2NedJIdRANxjLUMCFarXqr
+Дата создания	
+11 дек. 2018 г., 14:02:09
+Название regexp web
+...
+
+
+https://www.npmjs.com/package/react-social-buttons
+npm install react-social-buttons -D
+
+

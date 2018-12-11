@@ -14,11 +14,12 @@ module.exports = {
 	loader: 'babel-loader'
      },
      {
-	test: /\.css$/,
-	use: ['style-loader', {  // chain of loaders right to left
-	   loader: 'css-loader', 
-		options: { modules: true }
-	}
+			test: /\.css$/,
+			use: ['style-loader', {  // chain of loaders right to left
+				 loader: 'css-loader', 
+				options: { modules: true }
+			}
+			]
      }
      ]
   }
