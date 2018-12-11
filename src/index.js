@@ -3,6 +3,9 @@
 import ReactDOM from "react-dom";
 import React from "react";
 
+import React from "react";
+
+
 import styles from './index.css';
 const name = 'Vasya';
 const description = "very long description......";

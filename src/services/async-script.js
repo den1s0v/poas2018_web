@@ -6,5 +6,6 @@ export function asyncScript(src) {
 		script.src = src;
 		script.onload = resolve;
 		script.onerror = reject;
+		document.head.appendChild(script);
 	})
 }

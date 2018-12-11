@@ -9,5 +9,9 @@ module.exports = {
     'heroku_prt0vjhf' :
     'web_regexp'),
   port: process.env.PORT || 4000,
-  production: ((process.env.NODE_ENV === 'production') ? true : false)
+  production: ((process.env.NODE_ENV === 'production') ? true : false),
+		
+	google: {
+		clientID:  '289814883390-vqr4kc66i7e4n5urmahi4orl79ppdrhs.apps.googleusercontent.com'
+	}
 }

@@ -224,6 +224,15 @@ yq2NedJIdRANxjLUMCFarXqr
 
 
 https://www.npmjs.com/package/react-social-buttons
-npm install react-social-buttons -D
+npm install react-social-login-buttons -D
 
 
+npm i -D @babel/plugin-~~proposal-class-properties~~
+
+Refs and the DOM : получение ссылок на компоненты
+https://reactjs.org/docs/refs-and-the-dom.html
+
+
+Using a Google API Client Library
+https://developers.google.com/identity/sign-in/web/backend-auth
+npm install google-auth-library --save
