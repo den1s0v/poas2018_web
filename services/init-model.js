@@ -18,8 +18,8 @@ Model.init = async function (collectionName, schema, createModelCb) {
     console.log(`Creating new ${collectionName} collection`);
     try {
       const collection = await db.createCollection(collectionName, { validator: schema });
-      await collection.createIndex({ login: 1 }, { unique: true })
-      await collection.createIndex({ email: 1 }, { unique: true })
+      // await collection.createIndex({ login: 1 }, { unique: true })
+      // await collection.createIndex({ email: 1 }, { unique: true })
       return createModelCb(collection);
     } catch (error) {
       return Promise.reject(error);

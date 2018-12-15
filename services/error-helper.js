@@ -27,7 +27,7 @@ function getErrorInfo(error, documentName) {
   }
 }
 
-function promiseError(error, statusCode) {
+function promiseError(error, statusCode = 500) {
   error = (typeof error === 'string') ? new Error(error) : error;
   if (error instanceof Error) {
     error.statusCode = statusCode;

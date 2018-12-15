@@ -24,17 +24,17 @@ module.exports = {
       },
       samples: {
         type: 'array',
-        items: {
-          bsonType: 'objectId',
-          uniqueItems: true
-        }
+		items: {
+		  bsonType: 'objectId', // bsonType - типы для монго-ДБ (bson вместо json)
+		  uniqueItems: true
+		}
       },
       doneSamples: {
         type: 'array',
-        items: {
-          bsonType: 'objectId',
-          uniqueItems: true
-        }
+		items: {
+		  bsonType: 'objectId',
+		  uniqueItems: true
+		}
       },
       rating: {
         type: 'number'

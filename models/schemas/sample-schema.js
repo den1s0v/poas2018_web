@@ -1,24 +1,57 @@
-/* jsonSchema for regexp-sample object:
-  {
-    pattern: string
-    inputs: string[]
-  }
-// */
 module.exports = {
   $jsonSchema: {
     type: 'object',
-    required: ['pattern', 'inputs'],
-    pattern: {
+    required: ['_id', 'title', 'summary', 'sampleType', 'userId', 'cases'],
+    properties: {
+      _id: {
+        bsonType: 'objectId'
+      },
+      title: {
         type: 'string',
-        pattern: '/.+/[gim]{0,3}',
+        description: 'must be a string and is required'
       },
-      inputs: {
-      "items": {
-        "type": "string"
+      summary: {
+        type: 'string',
+        description: 'must be a string and is required'
       },
+      userId: {
+        bsonType: 'objectId'
+      },
+      sampleType: {
+        type: 'string',
+        enum: ['comparison', 'replacement']
+      },
+      cases: {
+        type: 'array',
+        items: {
+          type: 'object'
+        }
+      },
+      // doneUsers: {
+      //   type: 'array',
+      //   items: {
+      //     bsonType: 'objectId',
+      //     uniqueItems: true
+      //   }
+      // },
+      // comments: {
+      //   type: 'array',
+      //   items: {
+      //     type: 'object',
+      //     properties: {
+      //       userID: {
+      //         bsonType: 'objectId'
+      //       },
+      //       text: {
+      //         type: 'string'
+      //       },
+      //       created: {
+      //         bsonType: 'date'
+      //       }
+      //     }
+      //   }
+      // }
     },
-	// owner_id ??? ,
-	// private ??? ,
     additionalProperties: false
   }
 }

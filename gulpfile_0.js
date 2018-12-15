@@ -2,20 +2,14 @@ const path = require('path');
 const gulp = require('gulp');
 const browserSync = require('browser-sync').create();
 const nodemon = require('nodemon');
-// const chokidar = require('chokidar');
-const webpack = require('webpack-stream');
-const webpackConfig = require('./webpack.config');
+const chokidar = require('chokidar');
+const webpackStream = require('webpack-stream');
+const webpackConfig = require("./webpack.config");
 
 const serverPort = 4000;
 const proxyPort = 3000;
 const publicDir = './public';
 const appDir = './src';
-
-gulp.task('build-js', function () {
-    return gulp.src(`${appDir}/index.js`)
-        .pipe(webpack(webpackConfig))
-        .pipe(gulp.dest(publicDir));
-});
 
 gulp.task('nodemon', done => {
     nodemon('--inspect --ignore public/ --ignore node_modules/ --ignore gulpfile.js server.js --port ' + serverPort);    
@@ -27,10 +21,11 @@ gulp.task('nodemon', done => {
     })
 })
 
-gulp.task("build-html", () => {
-  return gulp.src(`${appDir}/**/*.html`)
-    .pipe(gulp.dest(publicDir));
-});
+// копировать все html файлы из src/ в public/
+gulp.task('build-html', () => {
+    return gulp.src(`${appDir}/**/*.html`)
+		.pipe(gulp.dest(publicDir));
+})
 
 gulp.task('browser-sync-init', done => {
     browserSync.init({
@@ -40,10 +35,9 @@ gulp.task('browser-sync-init', done => {
     done();
 })
 
-gulp.task('default', gulp.series('nodemon', 'browser-sync-init', 'build-html', 'build-js', () => {
+gulp.task('default', gulp.series('nodemon', 'browser-sync-init', "build-html", () => {
     gulp.watch(`${publicDir}/**/*.*`)
         .on('change', (path) => browserSync.reload(path))
         .on('add', browserSync.reload)
-        
-    gulp.watch(`${appDir}/**/*.html`, gulp.series("build-html"));
+    gulp.watch(`${appDir}/**/*.html`, gulp.series("build-html"))
 }))
