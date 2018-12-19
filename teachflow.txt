@@ -441,3 +441,7 @@ npm i -D styled-components
 
 Request: библиотечка для http-запросов в Node
 npm i request
+
+// full VkButton.js
+http://civnote.ru/boards/7/topics/148
+

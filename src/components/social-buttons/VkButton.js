@@ -1,43 +1,45 @@
 
 // Vk login button
+
+
 import React, { Component } from "react";
 import { createButton } from "react-social-login-buttons";
 import { asyncScript } from "../../services/async-script";
 import config from "../../config";
-import styled from "styled-components"
+import styled from "styled-components";
 
 const configVkButton = {
-	text: "",
-	icon: "vk",
-	iconFormat: name => `fa-fa-${name}`,
-	style: {background: "#587ea3"},
-	activeStyle: {background: "#466482"}
-}
+  text: "Войти через Вконтакте",
+  icon: "vk",
+  iconFormat: name => `fab fa-${name}`,
+  style: { background: "#587ea3" },
+  activeStyle: { background: "#466482" }
+};
 
 const VkButton = createButton(configVkButton);
 
-class VkButtonLogin = extends Component {
-	renderPopupWindow() {
-		const newWindow = vk_popup({width: 670, height: 350, url: config.vk.vkUrl });
-		newWindow.focus();
-		newWindow.addEventListener("message", (event) => {
-			if(event.origin === 'http:localhost:3000') {
-				alert(event.data);
-			}
-		});
-	}
-	render() {
-		return <VkButton className={this.props.className}></VkButton>
-	}
+class VkButtonLogin extends Component {
+  renderPopupWindow() {
+    const newWindow = vk_popup({width: 670, height: 350, url: config.vk.vkUrl});
+    newWindow.focus();
+    window.addEventListener('message', (event) => {
+      if (event.origin === 'http://localhost:3000') {
+        alert(event.data);
+      }
+    })
+  }
+
+  render() {
+    return <VkButton onClick={this.renderPopupWindow} className={this.props.className}></VkButton>
+  }
 }
 
 const styledVkButtonLogin = styled(VkButtonLogin)`
-	&:active {
-		background-color: #3a526b;
-	}
-`
+  &:active {
+    background-color: #3a526b !important;
+  }
+`;
 
-// http://civnote.ru/boards/7/topics/148
 function vk_popup(options) {
   var screenX =
       typeof window.screenX != "undefined" ? window.screenX : window.screenLeft,
@@ -60,4 +62,4 @@ function vk_popup(options) {
   return window.open(options.url, "vk_oauth", features);
 }
 
-export { styledVkButtonLogin as VkButton }
+export { styledVkButtonLogin as VkButton };
