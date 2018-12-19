@@ -236,3 +236,178 @@ https://reactjs.org/docs/refs-and-the-dom.html
 Using a Google API Client Library
 https://developers.google.com/identity/sign-in/web/backend-auth
 npm install google-auth-library --save
+
+
+15/12/2018
+
+Избавляемся от gulp`а И прокси browser-sync, чтобы клиент и сервер были на одном порту.
+Переходим к частичному обновлению страницы (самый писк)
+
+install node.js package:
+webpack-dev-middleware
+
+переименовать src -> client:
+командой 
+$ git mv src/ client/
+сделать более правильную историю git`а
+
+Новые пакеты webpack:
+npm i -D html-webpack-plugin file-loader webpack-hot-middleware react-hot-loader
+
+// webpack-dev-middleware: сборка файлов проекта на одном порту
+// webpack-hot-middleware: обновляет кусочек страницы на клиенте
+
+Переписываем webpack...
+у нас будет примерно как  react-create-app,  только круче (более гибко и конфигурируемо).
+В development режиме файлы js будут храниться
+
+------------ webpack-config-js ---- line 2 ------------
+const  HtmlWebpackPlugin = require('html-webpack-plugin');
+
+------------ client/index.js ---- line 2 ------------
+удалить  тег <script ...> bundle.js
+
+------------ webpack-config.js ---- самый низ ------------
+...
+	plugins: [
+		new HtmlWebpackPlugin({
+			inject: true, // скрипт будет вставлен в конец  body
+			template: 'client/index.html' // сюда попадут собранные скрипты
+		})
+	]
+}
+
+------------ server.js ---- line 12 ------------
+закомм. const PublicDir
+------------ server.js ---- line 10 ------------
+const  webpack = require('webpack');
+const  WebpackDevMiddleware = require('webpack-dev-middleware');
+const  webpackConfig = require('./webpack.config');
+const  compiler = webpack('webpackConfig');
+app.use(WebpackDevMiddleware(compiler, {
+	publicPath: webpackConfig.output.publicPath  // вид  url  в браузере
+	}))
+
+------------ webpack-config.js ---- line 11-12 ------------
+output:
+{
+	...
+	publicPath: '/'		// +
+}
+
+
+------------ gulpfile ---- line 21 ------------
+copy cmdline "--inspect --ignore public/ --ignore node_modules/ --ignore gulpfile.js server.js --port "
+
+------------ package.json ---- line 9-9 ------------
+dev: "nodemon ... (добавить --ignore client/ )"
+в итоге:
+dev: " --inspect --ignore public/ --ignore client/ --ignore node_modules/ --ignore gulpfile.js server.js --port "
+
+теперь запуск проекта не через gulp, а 
+$ npm run dev
+
+------------ google-auth-service.js ---- line 21 ------------
+закомментировать // verify().catch(console.error);
+
+------------ server.js ---- line 23 ------------
+заменить  app.listen(4000);  ->  app.listen(3000);
+
+запуск... ОК!
+
+------------ webpack-config.js ---- line 3 ------------
+const  webpack = require('webpack');
+------------ webpack-config.js ---- line 9 ------------
+
+exports = {
+	...,
+	entry [
+		'webpack-hot-middleware/client',
+		'./client/index.js'
+	],
+	...
+}
+
+------------ server.js ---- line 12 ------------
+const  WebpackHotMiddleware = require('webpack-hot-middleware');
+------------ server.js ---- line 14 ------------
+app.use(WebpackHotMiddleware(compiler, {
+	reload: true  // обновить страницу зависнет компиляция (затыр webpack`а)
+	}))
+// перед  app.use(WebpackDevMiddleware(compiler, 
+
+
+------------ .babelrc ---- line 2 ------------
+{
+  "presets": ["@babel/preset-env", "@babel/preset-react"]
+	"plugins": ["...","<новый компонент>"]
+}
+
+------------ App.js ---- line 3,16 ------------
+import { hot } from 'react-hot-loader/root'
+...
+export default hot (App); // посл. в файле
+
+
+-- работает динамическое выборочное изменение (обновление) компонентов
+
+hot loader: обновление компонентов по слоту  componentDidUpdate().
+Слот  componentDidMount() вызывается единожды при отрисовке компонента, т.е. при первом помещении его на страницу.
+Props`ы пробрасываются с объемлющих компонентов, и вызывается обновление.
+
+*> для кнопок со ссылками правильнее использовать тег <a>, для кнопок с действиями - <button>
+
+
+Серверная аутентификация
+========================
+
+------------ server.js ---- line (+) 34 ------------
+const googleTest(req, res, next) {
+	const userInfo = req.userInfo;
+	res.json(userInfo);
+}
+...
+app.post('', );
+
+------------ google-auth-service.js ---- line 12 ------------
+req.userInfo = payload; // 12
+next(); // 14
+// const userid = payload[]...  // закомм.
+
+------------ GoogleButton.js ---- line (+) 21-27 ------------
+				var myHeaders = new Headers();
+				myHeaders.append("Content-Type", "application/json");
+				var id_token = ...
+				fetch('/api/auth/google', {
+					method: 'POST',
+					body: JSON.stringify({token: id_token}),
+					headers: myHeaders
+				}).then(response => response.json()).then(userInfo => {
+					alert(JSON.stringify(userInfo, null, 2));
+				});
+				
+------------ UsersController.js ---- line (+) 24-31 ------------
+async function CreateGoogleUser(request, response, next, User) {
+	const userInfo = request.userInfo;
+	const newUser = {
+		login: ,
+		email: ,
+		passwordHash: '',
+		private: false,
+		isAdmin: false
+	}
+	await User.save(newUser).then(user => {
+		console.log('The new user saved to DB!');
+		response.json(user.ops);
+		next();
+	})
+}
+
+
+19/12/18
+=======================
+схема: поле  _id
+уникальные пол€
+
+DSL - domain specific language
+

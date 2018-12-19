@@ -1,4 +1,5 @@
 const path = require('path');
+const  webpack = require('webpack');
 
 // собрать js-модули вместе
 module.exports = {
