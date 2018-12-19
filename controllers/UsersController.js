@@ -1,7 +1,16 @@
-const modelInjector = require('../services/mc-decorators').modelInjector('User');
-const createToken = require('../services/auth-service').createToken;
+const { getModels, injectModelsToMethods, decorateActions, injectModelsToActions } = require('../services/models-injector')();
+const { createToken } = require('../services/auth-service');
+const UserModel = require('../models/UserModel');
 
-require('../models/User').then(modelInjector.injectModelToActions).catch(console.error);
+const UsersController = {
+  CreateUser,
+  Login,
+  UpdateUser
+}
+
+injectModelsToActions(UsersController, UserModel);
+
+module.exports = UsersController;
 
 async function CreateUser(request, response, next, User) {
   const newUser = request.body;
@@ -15,7 +24,7 @@ async function CreateUser(request, response, next, User) {
 async function Login(request, response, next, User) {
   const loginUser = request.body;
   await User.login(loginUser).then(createToken).then(token => {
-    response.json({token});
+    response.json({ token });
     next();
   })
 }
@@ -37,8 +46,3 @@ async function UpdateUser(request, response, next, User) {
   })
 }
 
-module.exports = modelInjector.decorateActions({
-  CreateUser,
-  Login,
-  UpdateUser
-})

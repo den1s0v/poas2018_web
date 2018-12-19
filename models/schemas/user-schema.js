@@ -30,7 +30,7 @@ module.exports = {
 				samples: {
 					type: 'array',
 			items: {
-				bsonType: 'objectId', // bsonType - С‚РёРїС‹ РґР»СЏ РјРѕРЅРіРѕ-Р”Р‘ (bson РІРјРµСЃС‚Рѕ json)
+				bsonType: 'objectId', // bsonType - типы для монго-ДБ (bson вместо json)
 				uniqueItems: true
 			}
 				},
@@ -47,5 +47,18 @@ module.exports = {
 			},
 			additionalProperties: false
 		}
-	}
+      },
+      doneSamples: {
+        type: 'array',
+        items: {
+          bsonType: 'objectId',
+          uniqueItems: true
+        }
+      },
+      rating: {
+        type: 'number'
+      }
+    },
+    additionalProperties: false
+  }
 }
