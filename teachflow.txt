@@ -411,3 +411,7 @@ async function CreateGoogleUser(request, response, next, User) {
 
 DSL - domain specific language
 
+> снова используем gulp для отслеживания измененмя схемы БД
+
+ещё нужно переменовать user-schema -> users-schema
+

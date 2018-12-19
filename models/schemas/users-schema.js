@@ -3,7 +3,7 @@ module.exports = {
   schema: {
 		$jsonSchema: {
 			type: 'object',
-			required: ['login', 'email', 'passwordHash', 'private', 'isAdmin'],
+			required: ['login', 'email', 'passwordHash', 'isPrivate', 'isAdmin', 'isActive'],
 			properties: {
 				_id: {
 					bsonType: 'objectId'

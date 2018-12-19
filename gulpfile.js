@@ -6,6 +6,9 @@ const nodemon = require('nodemon');
 const webpack = require('webpack-stream');
 const webpackConfig = require('./webpack.config');
 
+const mongodb = require('mongodb').MongoClient;
+const config = require('./config/config');
+
 const serverPort = 4000;
 const proxyPort = 3000;
 const publicDir = './public';
@@ -47,3 +50,24 @@ gulp.task('default', gulp.series('nodemon', 'browser-sync-init', 'build-html', '
         
     gulp.watch(`${appDir}/**/*.html`, gulp.series("build-html"));
 }))
+
+gulp.task('dev', gulp.series('nodemon', async () => {
+  const mongoClient = await mongodb.connect(config.mongoURL);
+  console.log('Successful connection to Mongo');
+  const db = mongoClient.db(config.mongodbName);
+
+	gulp.watch('./models/schemas/*.js').on('change', pathname => {
+		const collectionName = pathname.match(/(\w+)\-schema\.js$/)[1];
+		const result = await db.dropCollection(collectionName);
+		if (result) {
+			console.log('Connection ${collectionName} removed successfully');
+			nodemon.emit('restart');
+		}
+	})
+}))
+
+gulp.task('schemamon', done => {
+    nodemon('--inspect --ignore public/ --ignore node_modules/ --ignore gulpfile.js server.js');   
+    nodemon.once('start', done)
+})
+

@@ -1,6 +1,6 @@
 // const mongodb = require('mongodb').MongoClient;
 const bcryptjs = require('bcryptjs');
-const schema = require('./schemas/user-schema');
+const schema = require('./schemas/users-schema');
 const Model = require('../services/init-model');
 const objectId = require('mongodb').ObjectID;
 const { promiseError } = require('../services/error-helper')
