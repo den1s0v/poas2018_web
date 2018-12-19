@@ -7,6 +7,7 @@ const SamplesController = require('./controllers/SamplesController');
 const verifyToken = require('./services/auth-service').verifyToken;
 const apiTest = require('./services/api-test');
 // import { GoogleButton } from "  !  ./social-buttons/GoogleButton";
+import  { vkAuth } from require('./client/services/vk-auth-service');
 
 const publicDir = './public';
 
@@ -20,6 +21,7 @@ app.patch('/api/users/:login', validators.updateValidator, verifyToken, UsersCon
 // app.post('/api/samples/new', validators.addSampleValidator, verifyToken, SamplesController.CreateSample);
 
 // app.post('/api/auth/google', xxx)
+app.post('/api/auth/vk', vkAuth);
 
 
 app.listen(3000);

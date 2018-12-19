@@ -429,6 +429,7 @@ Google SmartLog - возможность сохранять пароли от разных сайтов в гугл-аккаунте
 
 https://vk.com/dev/access_token
 Implicit flow. Только на стороне клиента.
+https://vk.com/dev/authcode_flow_user
 
 Модный современный подход 'css in js' 
 Библиотека styled-components:
@@ -436,3 +437,7 @@ Implicit flow. Только на стороне клиента.
 npm i -D styled-components
 + расширение для vscode (подсветка css-синтаксиса): vscode-styled-components
 
+доп. стили пробрасываются ч/з компоненты и применяются к компонентам с заданным именем класса
+
+Request: библиотечка для http-запросов в Node
+npm i request

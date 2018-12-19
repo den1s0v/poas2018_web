@@ -56,7 +56,7 @@ gulp.task('dev', gulp.series('nodemon', async () => {
   console.log('Successful connection to Mongo');
   const db = mongoClient.db(config.mongodbName);
 
-	gulp.watch('./models/schemas/*.js').on('change', pathname => {
+	gulp.watch('./models/schemas/*.js').on('change', async pathname => {
 		const collectionName = pathname.match(/(\w+)\-schema\.js$/)[1];
 		const result = await db.dropCollection(collectionName);
 		if (result) {

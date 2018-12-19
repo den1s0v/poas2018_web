@@ -7,7 +7,7 @@ module.exports = {
 			properties: {
 				_id: {
 					bsonType: 'objectId'
-				}
+				},
 				login: {
 					type: 'string',
 					description: 'must be a string and is required'
@@ -21,7 +21,7 @@ module.exports = {
 					type: 'string',
 					description: 'must be a string and is required'
 				},
-				private: {
+				isPrivate: {
 					type: 'boolean'
 				},
 				isAdmin: {
@@ -29,17 +29,17 @@ module.exports = {
 				},
 				samples: {
 					type: 'array',
-			items: {
-				bsonType: 'objectId', // bsonType - типы для монго-ДБ (bson вместо json)
-				uniqueItems: true
-			}
+					items: {
+						bsonType: 'objectId', // bsonType - типы для монго-ДБ (bson вместо json)
+						uniqueItems: true
+					}
 				},
 				doneSamples: {
 					type: 'array',
-			items: {
-				bsonType: 'objectId',
-				uniqueItems: true
-			}
+					items: {
+						bsonType: 'objectId',
+						uniqueItems: true
+					}
 				},
 				rating: {
 					type: 'number'
@@ -47,18 +47,5 @@ module.exports = {
 			},
 			additionalProperties: false
 		}
-      },
-      doneSamples: {
-        type: 'array',
-        items: {
-          bsonType: 'objectId',
-          uniqueItems: true
-        }
-      },
-      rating: {
-        type: 'number'
-      }
-    },
-    additionalProperties: false
-  }
+	}
 }
