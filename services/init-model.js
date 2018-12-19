@@ -7,7 +7,7 @@ class Model {
   }
 }
 
-Model.init = async function (collectionName, schema, createModelCb) {
+Model.init = async function (collectionName, {schema, uniqueFields}, createModelCb) {
   const mongoClient = await mongodb.connect(config.mongoURL);
   console.log('Successful connection to Mongo');
   const db = mongoClient.db(config.mongodbName);
@@ -18,8 +18,10 @@ Model.init = async function (collectionName, schema, createModelCb) {
     console.log(`Creating new ${collectionName} collection`);
     try {
       const collection = await db.createCollection(collectionName, { validator: schema });
-      await collection.createIndex({ login: 1 }, { unique: true })
-      await collection.createIndex({ email: 1 }, { unique: true })
+			for (const field of uniqueFields) {
+				await collection.createIndex({ [field]: 1 }, { unique: true })
+			}
+      // await collection.createIndex({ email: 1 }, { unique: true })
       return createModelCb(collection);
     } catch (error) {
       return Promise.reject(error);
