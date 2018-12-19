@@ -7,7 +7,7 @@ const SamplesController = require('./controllers/SamplesController');
 const verifyToken = require('./services/auth-service').verifyToken;
 const apiTest = require('./services/api-test');
 // import { GoogleButton } from "  !  ./social-buttons/GoogleButton";
-import  { vkAuth } from require('./client/services/vk-auth-service');
+const  { vkAuth } = require('./src/services/vk-auth-service');
 
 const publicDir = './public';
 
