@@ -148,6 +148,7 @@ package.json:
 manifest: длЯ иконок рабочего стола на андроиде
 
 * pva-приложение : на все платформы сразу
+	- реализуется в браузере при помощи service-worker`ов
 https://whatwebcando.today
 * react-native: парсит и преобразовывает в native компоненты
 
@@ -409,9 +410,29 @@ async function CreateGoogleUser(request, response, next, User) {
 схема: поле  _id
 уникальные поля
 
-DSL - domain specific language
-
-> снова используем gulp для отслеживания измененмя схемы БД
+def:  DSL - domain specific language
 
 ещё нужно переменовать user-schema -> users-schema
+
+> снова используем gulp для отслеживания изменения схемы БД
+
+Аутентификация ч/з Вконтакте
+
+
+CASL : система управления ролями (пользователей)
+stalniy.github.io/casl
+Подходит для оч. больших проектов с громоздкими схемами
+
+vk.com/dev
+
+Google SmartLog - возможность сохранять пароли от разных сайтов в гугл-аккаунте
+
+https://vk.com/dev/access_token
+Implicit flow. Только на стороне клиента.
+
+Модный современный подход 'css in js' 
+Библиотека styled-components:
+
+npm i -D styled-components
++ расширение для vscode (подсветка css-синтаксиса): vscode-styled-components
 
