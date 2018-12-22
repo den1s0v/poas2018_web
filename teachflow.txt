@@ -452,3 +452,4 @@ http://civnote.ru/boards/7/topics/148
 Vk: запрос данных юзера
 https://vk.com/dev/users.get
 
+$ npm i --save react-router
