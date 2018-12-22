@@ -18,7 +18,6 @@ async function vkAuth(request, response, next) {
                 next();
             }
         }
-        
         // request.userOAuthInfo = userOAuthInfo;
         // next();
         
