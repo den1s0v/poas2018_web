@@ -453,3 +453,8 @@ Vk: запрос данных юзера
 https://vk.com/dev/users.get
 
 $ npm i --save react-router
+
+Изоморфное приложение:
+ управляется реактом, но первый раз html формируется на сервере, а не на клиенте (как обычно для реакта)
+ 
+$ npm i  react-bootstrap@next bootstrap
