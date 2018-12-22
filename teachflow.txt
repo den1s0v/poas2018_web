@@ -458,3 +458,9 @@ $ npm i --save react-router
  управляется реактом, но первый раз html формируется на сервере, а не на клиенте (как обычно для реакта)
  
 $ npm i  react-bootstrap@next bootstrap
+
+// преобразование css в более древний стандарт
+$ npm i -D postcss-loader postcss-preset-env file-loader sass-loader 
+
+sass-препроцесор - добавляет возможности языка программирования в CSS (импорты, функции, циклы, условия)
+
