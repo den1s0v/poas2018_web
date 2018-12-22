@@ -43,24 +43,24 @@ module.exports = {
   },
   module: {
     rules: [{
-			oneOf: [{
-				test: /\.jsx?$/,
-				exclude: /node_modules/,
-				loader: "babel-loader"
-			}, {
-				test: /\.css$/,
-				use: getStyleLoaders()
-			}, {
-				test: /\.scss$/, // SASS
-				use: getStyleLoaders({}, 'sass-loader')
-			}, {
-				exclude: [/\.(js|jsx|css|scss)$/, /\.html$/, /\.json$/],
-				loader: 'file-loader',
-				options: {
-					name: 'public/media/[name].[hash:8].[ext]',
-				}
-			}]
-		}]
+      oneOf: [{
+        test: /\.jsx?$/,
+        exclude: /node_modules/,
+        loader: "babel-loader"
+      }, {
+        test: /\.css$/,
+        use: getStyleLoaders()
+      }, {
+        test: /\.scss$/,
+        use: getStyleLoaders({}, 'sass-loader')
+      }, {
+        exclude: [/\.(js|jsx|css|scss)$/, /\.html$/, /\.json$/],
+        loader: 'file-loader',
+        options: {
+          name: 'public/media/[name].[hash:8].[ext]',
+        }
+      }]
+    }]
   },
   plugins: [
     new HtmlWebpackPlugin({
