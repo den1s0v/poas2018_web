@@ -4,6 +4,8 @@ import styles from "./index.scss";
 import App from "./components/App";
 
 ReactDOM.render(
-  <App />,
+      (<Router>
+				<App />
+      </Router>),
   document.getElementById('root')
 )

@@ -464,3 +464,4 @@ $ npm i -D postcss-loader postcss-preset-env file-loader sass-loader
 
 sass-препроцесор - добавляет возможности языка программирования в CSS (импорты, функции, циклы, условия)
 
+$ npm i -D node-sass
