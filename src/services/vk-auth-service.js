@@ -1,10 +1,15 @@
 const url = require('url');
 
-function vkAuth(request, response, next) {
+async function vkAuth(request, response, next) {
 	const query = url.parse(request.url, true).querys;
 	if (query.code) {
-		requestClient.get(`https://oauth.vk/com/access_token?...${query_code}` , (error, response, body) => {
-			if (error) {
+		const userOAuthInfo = await requestClient.get(`https://oauth.vk/com/access_token?...${query_code}` , (error, response, body) => {
+			if (userOAuthInfo.access_token) {
+				let additionalInfo = await requestClient.get(``);
+				if(additionalInfo.response && Array.isArray(additionalInfo.response)) {
+					
+				}
+				
 				console.error(error);
 				return;
 			}
