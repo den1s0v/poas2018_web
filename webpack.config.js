@@ -1,15 +1,19 @@
 const path = require('path');
-const  webpack = require('webpack');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const webpack = require('webpack');
 
-// собрать js-модули вместе
 module.exports = {
   mode: 'development',
   devtool: 'inline-source-map',
   watch: true,
-  entry: './src/index.js',
+  entry: [
+    'webpack-hot-middleware/client',
+    './client/index.js'
+  ],
   output: {
     path: path.resolve(__dirname, 'public'),
-    filename: 'bundle.js'
+    filename: 'bundle.js',
+    publicPath: '/'
   },
   module: {
     rules: [{
@@ -25,5 +29,12 @@ module.exports = {
         }
       }]
     }]
-  }
+  },
+  plugins: [
+    new HtmlWebpackPlugin({
+      inject: true,
+      template: 'client/index.html'
+    }),
+    new webpack.HotModuleReplacementPlugin()
+  ]
 }

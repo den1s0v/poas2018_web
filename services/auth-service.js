@@ -12,6 +12,7 @@ function verifyToken(request, response, next) {
         return responseError({ error: 'Failed to authenticate token.', response, statusCode: 401, props: { auth: false }})
       }
       request.userId = decodedToken.id;
+      // request.userId = decodedToken.email;
       next();
     })
   } else {
@@ -24,8 +25,15 @@ function createToken(userFromDB) {
   const token = jwt.sign({ id: userFromDB._id }, config.secret, {
     expiresIn: 86400
   })
+  // const token = jwt.sign({ email: userFromDB.email }, config.secret, {
+  //   expiresIn: 86400
+  // })
   return token;
 }
+
+// function createTokenByEmail(email) {
+
+// }
 
 module.exports = { 
   verifyToken, 

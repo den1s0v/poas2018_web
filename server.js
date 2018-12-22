@@ -6,12 +6,26 @@ const UsersController = require('./controllers/UsersController');
 const SamplesController = require('./controllers/SamplesController');
 const verifyToken = require('./services/auth-service').verifyToken;
 const apiTest = require('./services/api-test');
-// import { GoogleButton } from "  !  ./social-buttons/GoogleButton";
-const  { vkAuth } = require('./src/services/vk-auth-service');
 
-const publicDir = './public';
+const googleAuthService = require('./services/google-auth-service');
+const {vkAuth, sentFakeVkPage} = require('./services/vk-auth-service');
 
-app.use(lightServer.static(publicDir))
+const webpack = require('webpack');
+const webpackDevMiddleware = require('webpack-dev-middleware');
+const webpackHotMiddleware = require('webpack-hot-middleware');
+const webpackConfig = require('./webpack.config');
+const compiler = webpack(webpackConfig);
+
+app.use(webpackHotMiddleware(compiler, {
+    reload: true
+}));
+app.use(webpackDevMiddleware(compiler, {
+    publicPath: webpackConfig.output.publicPath
+}));
+
+// const publicDir = './public';
+
+// app.use(lightServer.static(publicDir))
 
 app.use(requestParser);
 app.post('/api/signup', validators.signupValidator, UsersController.CreateUser)
@@ -20,8 +34,12 @@ app.post('/api/login', validators.loginValidator, UsersController.Login)
 app.patch('/api/users/:login', validators.updateValidator, verifyToken, UsersController.UpdateUser)
 // app.post('/api/samples/new', validators.addSampleValidator, verifyToken, SamplesController.CreateSample);
 
-// app.post('/api/auth/google', xxx)
-app.post('/api/auth/vk', vkAuth);
+const googleTest = (request, response, next ) => {
+    const userInfo = request.userInfo;
+    response.json(userInfo);
+}
 
+app.post('/api/auth/google', googleAuthService, UsersController.CreateGoogleUser);
+app.get('/api/auth/vk', vkAuth, sentFakeVkPage /*, UsersController.CreateVkUser*/);
 
 app.listen(3000);

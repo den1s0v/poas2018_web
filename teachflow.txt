@@ -445,3 +445,10 @@ npm i request
 // full VkButton.js
 http://civnote.ru/boards/7/topics/148
 
+
+
+22/12/2018
+
+Vk: запрос данных юзера
+https://vk.com/dev/users.get
+

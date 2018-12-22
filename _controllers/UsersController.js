@@ -4,7 +4,6 @@ const UserModel = require('../models/UserModel');
 
 const UsersController = {
   CreateUser,
-  CreateGoogleUser,
   Login,
   UpdateUser
 }
@@ -18,20 +17,6 @@ async function CreateUser(request, response, next, User) {
   await User.save(newUser).then(user => {
     console.log('The new user saved to DB!');
     response.json(user.ops);
-    next();
-  })
-}
-
-async function CreateGoogleUser(request, response, next, User) {
-  const userInfo = request.userInfo;
-  const newUser = {
-    email: userInfo.email,
-    password: 'test',
-    isPrivate: false,
-    isAdmin: false
-  }
-  await User.save(newUser).then(createToken).then(token => {
-    response.json({ token });
     next();
   })
 }
