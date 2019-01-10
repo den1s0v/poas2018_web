@@ -101,6 +101,11 @@ npm i -D @babel<*>
 /preset-env
 /preset-react
 
+# всЄ вместе:
+npm i -D @babel/cli @babel/core @babel/polyfill @babel/preset-env @babel/preset-react
+npm i -D babel-loader
+
+
 ,
 babel-loader # loads to translate .js model
 
@@ -137,7 +142,7 @@ package.json:
     "not op_mini all"
   ]
 
-: Линтовщик: контроль стилистики кода и пре-компилировочный анализ кода ()
+: линтовщик: контроль стилистики кода и пре-компилировочный анализ кода ()
   "eslintConfig": {
     "extends": "react-app"
   },
@@ -229,6 +234,8 @@ npm install react-social-login-buttons -D
 
 
 npm i -D @babel/plugin-~~proposal-class-properties~~
+npm install --save-dev @babel/plugin-proposal-class-properties
+npm i -D @babel/plugin-proposal-class-properties
 
 Refs and the DOM : получение ссылок на компоненты
 https://reactjs.org/docs/refs-and-the-dom.html
@@ -245,7 +252,7 @@ npm install google-auth-library --save
 Переходим к частичному обновлению страницы (самый писк)
 
 install node.js package:
-webpack-dev-middleware
+npm i -D webpack-dev-middleware
 
 переименовать src -> client:
 командой 
@@ -435,6 +442,7 @@ https://vk.com/dev/authcode_flow_user
 Ѕиблиотека styled-components:
 
 npm i -D styled-components
+### удаление пакета: npm rm -D styled-components
 + расширение дл€ vscode (подсветка css-синтаксиса): vscode-styled-components
 
 доп. стили пробрасываютс€ ч/з компоненты и примен€ютс€ к компонентам с заданным именем класса

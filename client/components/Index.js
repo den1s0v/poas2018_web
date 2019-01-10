@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Nav, Navbar } from "react-bootstrap";
 
-export function NavBar(props) {
+export function Index(props) {
 	return (
 			<NavBar bg="primary" variant="dark">
 				<Nav>
