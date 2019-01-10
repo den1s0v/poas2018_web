@@ -1,28 +1,22 @@
 import React, { Component } from "react";
-import { GoogleButton } from "./social-buttons/GoogleButton";
-import { VkButton } from "./social-buttons/VkButton";
 import { hot } from "react-hot-loader/root";
 import { Button } from "react-bootstrap";
 import { NavBar } from "./NavBar";
+import { BrowserRouter as Router, Route, Link } from "react-router-dom"
 
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+import { Login } from "./Login";
+import { Index } from "./Index";
 
 class App extends Component {
   render() {
     return (
-      <Router>
-				<Switch>
-						// <NavBar></NavBar>
-						// <Route path='/' exact component={Index} />
-						<h1>Regexp tester</h1>
-						<input type="text"/>
-						<GoogleButton />
-						<VkButton />
-						<Button size='lg' variant='danger' >Danger</Button>
-				</Switch>
-      </Router>
+      <>
+      <NavBar></NavBar>
+      <Route path="/" exact Component={Index} />
+      <Route path="/login/" exact Component={Login} />
+      {/* <Route path="/users/" exact Component={Users} /> */}
+      </>
     )
   }
 }
-
 export default hot(App);

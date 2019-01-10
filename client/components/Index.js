@@ -1,12 +1,9 @@
-import React, { Component } from "react";
-import { Nav, Navbar } from "react-bootstrap";
+import React from "react";
+// import { GoogleButton } from "./social-buttons/GoogleButton";
+// import { VkButton } from "./social-buttons/VkButton";
 
-export function Index(props) {
-	return (
-			<NavBar bg="primary" variant="dark">
-				<Nav>
-					<Nav.Link>Home</Nav.Link>
-				</Nav>
-			</NavBar>
-		)
+export function Index(params) {
+  return (
+    <h1>Regexp tester</h1>
+  );
 }
