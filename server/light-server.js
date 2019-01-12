@@ -57,6 +57,10 @@ class LightServer {
     this[requestArray].push({ method, url, middleware })
   }
 
+  /** Set a middleware handlers for a specific url or for general request.
+      Any HTTP method is allowed.
+      use( [url:string ,]  {handlers:function}+ )
+  */
   use(...args) {
     const url = (typeof args[0] === 'string') ? args[0] : 'all';
     const middleware = args.filter(arg => typeof arg === 'function')

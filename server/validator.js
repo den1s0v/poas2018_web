@@ -8,9 +8,10 @@ module.exports = function validator(schema = {}) {
       if (schema.hasOwnProperty(key)) {
         if ((key in request.body)
             && ((typeof request.body[key] === "string")
-            && schema[key].type instanceof RegExp
-            && schema[key].type.test(request.body[key])
-            || (typeof request.body[key] === schema[key].type))) {
+              && schema[key].type instanceof RegExp
+              && schema[key].type.test(request.body[key])
+              || (typeof request.body[key] === schema[key].type))
+            ) {
           newBody[key] = request.body[key];
         } else if (schema[key].required) {
           responseError({ error: "Incorrect request body!", statusCode: 400, response })
