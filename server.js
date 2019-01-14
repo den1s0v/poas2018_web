@@ -20,6 +20,7 @@ app.use(webpackHotMiddleware(compiler, {
     reload: true
 }));
 app.use(webpackDevMiddleware(compiler, {
+    noInfo: true,
     publicPath: webpackConfig.output.publicPath
 }));
 
