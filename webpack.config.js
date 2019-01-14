@@ -30,7 +30,8 @@ function getStyleLoaders(cssOptions = {}, preProcessor) {
 
 module.exports = {
   mode: 'development',
-  devtool: 'inline-source-map',
+  // devtool: 'inline-source-map',
+  // devtool: 'cheap-module-eval-source-map',
   watch: true,
   entry: [
     'webpack-hot-middleware/client',
@@ -46,12 +47,18 @@ module.exports = {
       oneOf: [{
         test: /\.jsx?$/,
         exclude: /node_modules/,
-        loader: "babel-loader"
+        // loader: "babel-loader"
+        loaders: [
+          // 'react-hot-loader',
+          "babel-loader"
+        ]
       }, {
         test: /\.css$/,
+        exclude: /node_modules/,
         use: getStyleLoaders()
       }, {
         test: /\.scss$/,
+        exclude: /node_modules/,
         use: getStyleLoaders({}, 'sass-loader')
       }, {
         exclude: [/\.(js|jsx|css|scss)$/, /\.html$/, /\.json$/],
@@ -63,7 +70,8 @@ module.exports = {
     }]
   },
   plugins: [
-    new HtmlWebpackPlugin({
+      new webpack.optimize.OccurrenceOrderPlugin(),
+      new HtmlWebpackPlugin({
       inject: true,
       template: 'client/index.html'
     }),

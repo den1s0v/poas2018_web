@@ -251,6 +251,8 @@ npm install google-auth-library --save
 Избавляемся от gulp`а И прокси browser-sync, чтобы клиент и сервер были на одном порту.
 Переходим к частичному обновлению страницы (самый писк)
 
+WebpackТs Hot Module Replacement (HMR) allows you to replace updated modules without reloading the browser. 
+
 install node.js package:
 npm i -D webpack-dev-middleware
 
