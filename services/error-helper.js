@@ -18,7 +18,7 @@ function getErrorInfo(error, documentName) {
       case 121:
         return { message: `Incorrect ${documentName} data for the DB`, statusCode: 500 }
       case 11000:
-        return { message: `This ${documentName} has already existed`, statusCode: 500 }
+        return { message: `This ${documentName} is already exist`, statusCode: 500 }
       default:
         return { message: error.message, statusCode: 500 }
     }

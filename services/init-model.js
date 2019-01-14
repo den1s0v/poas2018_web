@@ -7,21 +7,23 @@ class Model {
   }
 }
 
+/** createModelCb -- callback */
 Model.init = async function (collectionName, {schema, uniqueFields}, createModelCb) {
-  const mongoClient = await mongodb.connect(config.mongoURL);
-  console.log('Successful connection to Mongo');
+  const mongoClient = await mongodb.connect(config.mongoURL, { useNewUrlParser: true });
+  console.log(`Successful connection to Mongo (collection: ${collectionName})`);
   const db = mongoClient.db(config.mongodbName);
+  // поиск коллекций с заданным именем
   const listCollections = await db.listCollections({ name: collectionName }).toArray();
-  if (listCollections.length) {
+  if (listCollections.length) {  // есть одна коллекция
     return createModelCb(db.collection(collectionName));
-  } else {
+  } else {    // нет ни одной коллекции
     console.log(`Creating new ${collectionName} collection`);
     try {
       const collection = await db.createCollection(collectionName, { validator: schema });
 			for (const field of uniqueFields) {
 				await collection.createIndex({ [field]: 1 }, { unique: true })
 			}
-      // await collection.createIndex({ email: 1 }, { unique: true })
+
       return createModelCb(collection);
     } catch (error) {
       return Promise.reject(error);

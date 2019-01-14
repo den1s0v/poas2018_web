@@ -22,7 +22,7 @@ class User extends Model {
     const { login, email, password } = loginUser;
     const loginQuery = login ? { login } : (email ? { email } : null);
     if (!loginQuery) {
-      return promiseError("Neither login nor email are presented in the request", 403)
+      return promiseError("Neither login nor email are present in the request", 403)
     }
     return this.collection.findOne(loginQuery).then(userFromDB => {
       if (userFromDB) {
