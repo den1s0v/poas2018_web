@@ -8,7 +8,6 @@ import { ToggleButtonGroup, ToggleButton } from "react-bootstrap";
 // import { BrowserRouter as Router, Route, Link } from "react-router-dom"
 
 // import 'bootstrap/dist/css/bootstrap.css'
-
 // import { Login } from "./Login";
 // import { Index } from "./Index";
 
@@ -19,7 +18,7 @@ class ToggleButtonGroupControlled extends React.Component {
     this.handleChange = this.handleChange.bind(this);
 
     this.state = {
-      value: 1
+      value: props.value
     };
   }
 

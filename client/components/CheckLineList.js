@@ -22,7 +22,7 @@ class CheckLineList extends Component {
           </thead>
           <tbody>
               <CheckLine  {...{isEdit:true, isOkMatch:true, str:'абвгдiш', mustMatch:true, listIndex:0}} />
-              <CheckLine {...{isEdit:false, isOkMatch:false,   mustMatch:null, listIndex:1}} />
+              <CheckLine {...{isEdit:false, isOkMatch:false,   mustMatch:false, listIndex:1}} />
           </tbody>
         </Table>
       </>
