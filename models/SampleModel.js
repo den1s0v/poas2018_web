@@ -1,43 +1,61 @@
-// const mongodb = require('mongodb').MongoClient;
 const schema = require('./schemas/sample-schema');
 const Model = require('../services/init-model');
-const UserModel = require('./UserModel');
 const objectId = require('mongodb').ObjectID;
 const { promiseError } = require('../services/error-helper')
-
-const { getModels, injectModelsToMethods, decorateMethod } = require('../services/models-injector')();
 
 class Sample extends Model {
   constructor(collection) {
     super(collection);
-    this.save = decorateMethod(this.save);
-    getModels(UserModel).then(injectModelsToMethods).catch(console.error);
+    // console.log(`Created Sample model`);
+  }
+  
   async template(newOwnerId = null) {
     return {
-//*   // 'title', 'regex', / *'sampleType',* / 'ownerId', 'stars', 'regexLenLimit', 'cases'
+      // 'title', 'regex', / *'sampleType',* / 'ownerId', 'stars', 'regexLenLimit', 'cases'
       title: 'Моя регулярка',
       regex: 'a*b+c',
       // sampleType: ,
-//*/
       ownerId: newOwnerId || new objectId(),
-//*
       stars: 1,
       regexLenLimit: 0, // no limit
       cases: [{str:'bc'},{str:'abcc'},{str:'aabbc'},{str:'aacc'},],
-//*/
     };
   }
 
-  async save(newSample, User) {
+  async save(newSample, UserModel) {
     newSample._id = new objectId();
-    newSample.userId = new objectId(newSample.userId);
-    const insertedSample = await this.collection.insertOne(newSample);
-    await User.addSample(newSample.userID, sampleId);
-    return insertedSample;
+// !    newSample.ownerId = new objectId(newSample.userId);
+
+    // console.log('inserting Sample:', newSample);
+    
+    return this.collection.insertOne(newSample)
+      .then(async insertedSample => {
+        ///
+        // console.log('{UserModel}:',JSON.stringify(UserModel))
+        // console.log('check UserModel`s type:', typeof UserModel);
+        // console.log('UserModel.addSample:',UserModel.addSample)
+        ///
+        await UserModel.addSample(insertedSample.ownerId, insertedSample._id);
+        return insertedSample;
+      })
   }
 
-  async update({ userId, login }, newUserData) {
+  /*async update({ userId, login }, newUserData) {
     
+  } */
+
+  async allFor(userId) {
+    let samples;
+    await new Promise((resolve,reject) => {
+      // this.collection.find({ ! }).toArray(function(err, docs) {
+      this.collection.find({ownerId:userId}).toArray(function(err, docs) {
+        // console.log(' >>>>>>> In .toArray(function(err, docs)) func!')
+        resolve(err || docs);
+      })
+    })
+    .then(result => samples=result);
+    // console.log(' >>>>>>> returning samples!')
+    return samples;
   }
 
 }

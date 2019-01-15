@@ -35,6 +35,10 @@ app.post('/api/login', validators.loginValidator, UsersController.Login)
 app.patch('/api/users/:login', validators.updateValidator, verifyToken, UsersController.UpdateUser)
 // app.post('/api/samples/new', validators.addSampleValidator, verifyToken, SamplesController.CreateSample);
 
+// <debug-test>
+app.get('/test', SamplesController.SampleTestFunc);
+// </debug-test>
+
 const googleTest = (request, response, next ) => {
     const userInfo = request.userInfo;
     response.json(userInfo);

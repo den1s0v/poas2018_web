@@ -14,6 +14,12 @@ Model.init = async function (collectionName, {schema, uniqueFields}, createModel
   const db = mongoClient.db(config.mongodbName);
   // поиск коллекций с заданным именем
   const listCollections = await db.listCollections({ name: collectionName }).toArray();
+  
+  ///
+  // console.log('listCollections:',listCollections);
+  //   getCollectionInfos({name: 'students'})
+  ///
+  
   if (listCollections.length) {  // есть одна коллекция
     return createModelCb(db.collection(collectionName));
   } else {    // нет ни одной коллекции
