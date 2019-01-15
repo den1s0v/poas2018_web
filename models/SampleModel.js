@@ -12,6 +12,20 @@ class Sample extends Model {
     super(collection);
     this.save = decorateMethod(this.save);
     getModels(UserModel).then(injectModelsToMethods).catch(console.error);
+  async template(newOwnerId = null) {
+    return {
+//*   // 'title', 'regex', / *'sampleType',* / 'ownerId', 'stars', 'regexLenLimit', 'cases'
+      title: 'Моя регулярка',
+      regex: 'a*b+c',
+      // sampleType: ,
+//*/
+      ownerId: newOwnerId || new objectId(),
+//*
+      stars: 1,
+      regexLenLimit: 0, // no limit
+      cases: [{str:'bc'},{str:'abcc'},{str:'aabbc'},{str:'aacc'},],
+//*/
+    };
   }
 
   async save(newSample, User) {

@@ -5,7 +5,7 @@ module.exports = {
     properties: {
       _id: {
         bsonType: 'objectId'
-      },           /*
+      }, // /*
       title: {
         type: 'string',
         description: 'must be a string and is required'
@@ -13,10 +13,10 @@ module.exports = {
       regex: {
         type: 'string',
         description: 'must be a string and is required'
-      },              */
+      }, // */
       ownerId: {
         bsonType: 'objectId'
-      },              /*
+      },  // /*
 //    sampleType: {
 //      type: 'string',
 //      enum: ['comparison', 'replacement']
@@ -33,7 +33,7 @@ module.exports = {
         items: {
           type: 'object'
         }
-      },                */
+      },  // */
       // doneUsers: {
       //   type: 'array',
       //   items: {
