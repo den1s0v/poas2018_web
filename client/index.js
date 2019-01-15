@@ -27,14 +27,14 @@ console.log('index begin');
  - solvedSamples[]
 
 { Sample (Task) }
- - ownerId: str
+ - ownerId: objectId
  - regex[userId -> str]  --- правильный  паттерн, придуманный пользователем (решил, если присутствует в этом списке)
   - отображение:
     - editablePattern:str
     - isPatternValid: boolean
  - stars: int  --- сложность задания
  - regexLenLimit: int  --- ограничение на длину регулярки (задание)
- - checkLines[] --- проверочные примеры
+ - cases[] --- проверочные примеры
    - хранение: { str: str, mustMatch: true/false/undefined }  --- null для mustMatch означает по умолчанию от паттерна
    - отображение (решение)  +: { isOkMatch:true/false/undefined }
    - отображение (редактор) +: { edit:true, onRemoveCallback:func }
