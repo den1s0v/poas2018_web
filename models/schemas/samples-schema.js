@@ -1,32 +1,39 @@
 module.exports = {
   $jsonSchema: {
     type: 'object',
-    required: ['_id', 'title', 'summary', 'sampleType', 'userId', 'cases'],
+    required: ['_id', /*'title', 'regex', /*'sampleType', 'ownerId', 'stars', 'regexLenLimit', 'cases'*/],
     properties: {
       _id: {
         bsonType: 'objectId'
-      },
+      },           /*
       title: {
         type: 'string',
         description: 'must be a string and is required'
       },
-      summary: {
+      regex: {
         type: 'string',
         description: 'must be a string and is required'
-      },
-      userId: {
+      },              */
+      ownerId: {
         bsonType: 'objectId'
+      },              /*
+//    sampleType: {
+//      type: 'string',
+//      enum: ['comparison', 'replacement']
+//    },
+      stars: {
+        type: 'int',
+//      enum: [1,2,3,4,5]
       },
-      sampleType: {
-        type: 'string',
-        enum: ['comparison', 'replacement']
+      regexLenLimit: {
+        type: 'int',
       },
       cases: {
         type: 'array',
         items: {
           type: 'object'
         }
-      },
+      },                */
       // doneUsers: {
       //   type: 'array',
       //   items: {

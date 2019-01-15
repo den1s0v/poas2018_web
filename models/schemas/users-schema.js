@@ -30,7 +30,7 @@ module.exports = {
 				samples: {
 					type: 'array',
 					items: {
-						bsonType: 'objectId', // bsonType - типы для монго-ДБ (bson вместо json)
+						bsonType: 'objectId',  // bsonType - типы для монго-ДБ (bson вместо json)
 						uniqueItems: true
 					}
 				},

@@ -58,17 +58,19 @@ gulp.task('schemamon', done => {
 
 gulp.task('dev', gulp.series('schemamon', async () => {
     const mongoClient = await mongodb.connect(config.mongoURL);
-    console.log('Successful connection to Mongo');
+    console.log('SCHEMAMON: Successful connection to Mongo');
     const db = mongoClient.db(config.mongodbName);
 
     gulp.watch('./models/schemas/*.js').on('change', async (pathname) => {
-        const colleactionName = pathname.match(/(\w+)\-schema\.js$/)[1];
-        const result = await db.dropCollection(colleactionName);
+        const collectionName = pathname.match(/(\w+)\-schema\.js$/)[1];
+        console.log(`SCHEMAMON: Removing the ${collectionName} collection ...`);
+        const result = await db.dropCollection(collectionName);
 
         if (result) {
-            console.log(`Successfull removing of the ${colleactionName} collection`);
+            console.log(`SCHEMAMON: Successfull removing of the ${collectionName} collection`);
             nodemon.emit('restart');
-
+        } else {
+          console.log(`SCHEMAMON: Error removing of the ${collectionName} collection!`);
         }
     })
 }));
