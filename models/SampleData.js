@@ -12,7 +12,7 @@
 class SampleData /* extends Model */ {
   constructor(sampleObj) {
     // super(collection);
-	this.dbObj = dbObj; // DB object (sampleObj)
+	this.dbObj = sampleObj; // DB object (sampleObj)
 	this.obj = Object.assign({}, this.dbObj); // editable object
   }
   
@@ -40,14 +40,15 @@ function f_fetchSamples({userId, mode='all'} = {}) {
 	
   console.log('fetchSamples: options:',{userId, mode});
 
-  fetch('/api/sample/get', {
+  return fetch('/api/sample/get', {
     method: 'POST',
     body: JSON.stringify({userId, mode}),
     headers: /* new Headers( */{"Content-Type": "application/json"} // )
   }).then(response => response.json()).then(samples => {
-    console.log("recieved samples:\n",JSON.stringify(samples, null, 2));
-  });	  
+    // console.log("recieved samples:\n",JSON.stringify(samples, null, 2));
+    return samples.map((sample) => new SampleData(sample))
+  });
 }
-  
+
 
 module.exports = { SampleData , fetchSamples : f_fetchSamples };

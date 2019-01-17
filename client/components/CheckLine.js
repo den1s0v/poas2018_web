@@ -32,7 +32,7 @@ class ToggleButtonGroupControlled extends React.Component {
     const {
       buttons,
       listIndex,
-      } = this.props;
+    } = this.props;
     return (
       <ToggleButtonGroup
         key={listIndex}
@@ -122,7 +122,8 @@ class CheckLine extends Component {
       str,
       mustMatch = true,
       listIndex = 0,
-      } = this.props;
+    } = this.props;
+    console.log('component CheckLine render():str of', str && str.length,'chars.');
       
     const isOk = isOkMatch===undefined? <b>???</b> : ( isOkMatch? (<>OK</>) : <b><i>Fail</i></b> );
     const row_class = isOkMatch===undefined? "default" : ( isOkMatch? "success" : "danger" );

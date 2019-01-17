@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import ReactDOM from "react-dom";
 import { hot } from "react-hot-loader/root";
 import { Table, ProgressBar } from "react-bootstrap";
 
@@ -6,10 +7,26 @@ import { Table, ProgressBar } from "react-bootstrap";
 import CheckLine  from "./CheckLine";
 
 class CheckLineList extends Component {
+  constructor(props, context) {
+    super(props, context);
+
+    // this.handleChange = this.handleChange.bind(this);
+
+    this.state = {
+      cases: props.cases
+    };
+  }
+
   render() {
+    // read props
+    const {
+      cases,
+    } = this.props;
+    console.log('component CheckLineList render():', cases && cases.length,'cases.');
+      
     return (
       <>
-        <ProgressBar striped variant="success" now={60} label={`${100*0.6}%`} />
+        <ProgressBar striped variant="success" now={1*cases} label={`${1*cases} шт`} />
         <br />
 
         <Table striped hover size="sm">
@@ -21,8 +38,7 @@ class CheckLineList extends Component {
             </tr>
           </thead>
           <tbody>
-              <CheckLine  {...{isEdit:true, isOkMatch:true, str:'абвгдiш', mustMatch:true, listIndex:0}} />
-              <CheckLine {...{isEdit:false, isOkMatch:false,   mustMatch:false, listIndex:1}} />
+             { /* samples[0]. */cases.map(case_line => ReactDOM.render( <CheckLine {...{isEdit:true, ...case_line}} /> )) }
           </tbody>
         </Table>
       </>
@@ -32,6 +48,10 @@ class CheckLineList extends Component {
 export default hot(CheckLineList);
 
 /*
+              <CheckLine {...{isEdit:true,  isOkMatch:true, str:'абвгдiш', mustMatch:true, listIndex:0}} />
+              <CheckLine {...{isEdit:false, isOkMatch:false,   mustMatch:false, listIndex:1}} />
+
+
         <div style={{"class":"progress"}}>
           <div style={{"class":"progress-bar bg-success", role:"progressbar", style:"width: 25%", "ariaValuenow":"25", "ariaValuemin":"0", "ariaValuemax":"100"}}>25%</div>
         </div>

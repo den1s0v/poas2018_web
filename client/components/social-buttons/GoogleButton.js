@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import { GoogleLoginButton } from "react-social-login-buttons";
 import { asyncScript } from "../../services/async-script";
-import config from "../../config";
+ 
+ /* ! */  import config from "../../config";
 
 function authGoogle(button) {
 
