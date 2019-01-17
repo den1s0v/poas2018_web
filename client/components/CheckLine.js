@@ -118,20 +118,33 @@ class CheckLine extends Component {
     // read props
     const {
       isEdit,
-      isOkMatch=undefined, 
-      str,
-      mustMatch = true,
-      listIndex = 0,
+      case_line,
+      key,
     } = this.props;
-    console.log('component CheckLine render():str of', str && str.length,'chars.');
+    const {
+      str,
+    } = case_line;
+    
+    // match: re.test(this.str),
+    // db_match: db_re.test(this.str),
+    const {match, db_match} = case_line.test();
+
+    const listIndex = key || 0;
+    const isOkMatch = db_match === match;
+    const mustMatch = match;
+    
+    console.log('component CheckLine render():str',str,'of', str && str.length,'chars.');
       
     const isOk = isOkMatch===undefined? <b>???</b> : ( isOkMatch? (<>OK</>) : <b><i>Fail</i></b> );
     const row_class = isOkMatch===undefined? "default" : ( isOkMatch? "success" : "danger" );
+
+    // // console.log('component CheckLine render():debug.',{isOkMatch,mustMatch,listIndex,isEdit});
+
     return (
-      <tr className={"table-"+row_class}>
+      <tr className={"table-"+row_class} /* key={listIndex} */>
         <td>{isOk}</td>
         <td>
-          <label>{str || (<i>= no text specified= </i>)}</label>
+          <label>{str? ("“"+str+"”") : (<i>= no text specified= </i>)}</label>
           { str ? <span style={{"float":"right"}}>Длина: {str.length}</span> : "" }
         </td>
         <td>

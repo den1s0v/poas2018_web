@@ -23,9 +23,11 @@ class CheckLineList extends Component {
     } = this.props;
     console.log('component CheckLineList render():', cases && cases.length,'cases.');
       
+    let i = 0;
+      
     return (
       <>
-        <ProgressBar striped variant="success" now={1*cases.length} label={`${1*cases.length} шт`} />
+        <ProgressBar striped variant="success" now={10*cases.length} label={`${1*cases.length} шт`} />
         <br />
 
         <Table striped hover size="sm">
@@ -37,7 +39,11 @@ class CheckLineList extends Component {
             </tr>
           </thead>
           <tbody>
-             { cases.map(case_line => ( <CheckLine {...{isEdit:true, ...case_line}} /> )) }
+            { cases.map(case_line => ( <CheckLine {...{
+                isEdit:true, 
+                key:(i+=1,i), //  as listIndex 
+                case_line
+              }} /> )) }
           </tbody>
         </Table>
       </>

@@ -12,8 +12,16 @@
 class SampleData /* extends Model */ {
   constructor(sampleObj) {
     // super(collection);
-	this.dbObj = sampleObj; // DB object (sampleObj)
-	this.obj = Object.assign({}, this.dbObj); // editable object
+    this.dbObj = sampleObj; // DB object (sampleObj)
+    // скопировать объект
+    this.obj = Object.assign({}, this.dbObj); // editable object
+    // конвертировать список тестовых строк в спец. объекты
+    this.obj.cases = this.dbObj.cases.map(v => new SampleCase(v, this.dbObj, this.obj));
+  }
+  
+  constructRegex(re_pattern) {
+    
+    return false;
   }
   
   /** returns boolean */
@@ -27,8 +35,31 @@ class SampleData /* extends Model */ {
       // alert(JSON.stringify(userInfo, null, 2));
     // });	  
   }
-  
+}
 
+function SampleCase(case_line, dbObj, editableObj) {
+  this.str = case_line.str;
+  this._id = case_line._id;
+  // дополнительные данные
+  this.db_sample = dbObj;
+  this.editable_sample = editableObj;
+  
+  this.test = (re_pattern) => {
+    if((typeof re_pattern !== 'string') && ! (re_pattern instanceof RegExp)) {
+      re_pattern = this.editable_sample.regex;
+    }
+
+    const re = new RegExp(re_pattern);
+    const db_re = new RegExp(this.db_sample.regex);
+    // // console.log({re,db_re});
+    return {
+      match: re.test(this.str),
+      db_match: db_re.test(this.str),
+    }
+  };
+  
+  
+  
 }
 
 // SampleData.fetchSamples = f_fetchSamples;
