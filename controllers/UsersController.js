@@ -48,7 +48,7 @@ async function UpdateUser(request, response, next, User) {
   const newUserData = request.body;
   if (!(await User.isAdmin(request.userId)) && (newUserData.login || newUserData.email) && !newUserData.password) {
     response.status(403).json({
-      error: "Password required for update user data"
+      error: "Password required to update user data"
     })
     return;
   }

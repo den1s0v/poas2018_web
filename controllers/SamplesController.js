@@ -1,5 +1,6 @@
 const { getModels, injectModelsToMethods, decorateActions, injectModelsToActions } = require('../services/models-injector')();
 const { createToken } = require('../services/auth-service');
+
 const SampleModel = require('../models/SampleModel');
 
 let UserModel = null;
@@ -7,8 +8,9 @@ const UserModelPromise = require('../models/UserModel');
 UserModelPromise.then(model => UserModel=model);
 
 const SampleController = {
-  CreateSample,
   SampleTestFunc,
+  CreateSample,
+  GetSamples,
 }
 
 injectModelsToActions(SampleController, SampleModel);
@@ -50,4 +52,28 @@ async function CreateSample(request, response, next, Sample) {
     response.json(sample.ops);
     next();
   })
+}  
+
+async function GetSamples(request, response, next, Sample) {
+  const options = request.body;
+  const valid = ['all','my','quiz'].includes(options.mode) && 
+				(options.mode === 'all' || options.userId);
+  if( ! valid ) {
+	  // 412 Precondition Failed («условие ложно»)
+    response.status(412).json({
+      error: "Wrong request options"
+    })
+  }
+  
+  let allSamples = await Sample.allFor(options.userId)
+    .catch(e => {
+      response.status(500).json({
+        error: "Select error: "+e.toString()
+      })
+      return promiseError("Select error: "+e.toString(), 500);
+      return;
+    });
+    
+  response.json(allSamples);
+  next();
 }

@@ -15,6 +15,8 @@ ReactDOM.render(
 
 console.log('index begin');
 
+const SampleData = require('../models/SampleData');
+SampleData.fetchSamples();
 
 
 /***********

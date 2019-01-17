@@ -39,6 +39,9 @@ app.patch('/api/users/:login', validators.updateValidator, verifyToken, UsersCon
 app.get('/test', SamplesController.SampleTestFunc);
 // </debug-test>
 
+app.post('/api/sample/get', SamplesController.GetSamples);
+
+
 const googleTest = (request, response, next ) => {
     const userInfo = request.userInfo;
     response.json(userInfo);

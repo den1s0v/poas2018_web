@@ -9,6 +9,7 @@ class Sample extends Model {
     // console.log(`Created Sample model`);
   }
   
+  // !!
   async template(newOwnerId = null) {
     return {
       // 'title', 'regex', / *'sampleType',* / 'ownerId', 'stars', 'regexLenLimit', 'cases'
@@ -18,7 +19,8 @@ class Sample extends Model {
       ownerId: newOwnerId || new objectId(),
       stars: 1,
       regexLenLimit: 0, // no limit
-      cases: [{str:'bc'},{str:'abcc'},{str:'aabbc'},{str:'aacc'},],
+      cases: [{str:'bc'},{str:'aacc'},] // [{str:'bc'},{str:'abcc'},{str:'aabbc'},{str:'aacc'},]
+        .map(o => Object.assign(o,{_id:new objectId()})),
     };
   }
 
@@ -48,9 +50,10 @@ class Sample extends Model {
     let samples;
     await new Promise((resolve,reject) => {
       // this.collection.find({ ! }).toArray(function(err, docs) {
-      this.collection.find({ownerId:userId}).toArray(function(err, docs) {
+      this.collection.find( userId? {ownerId:userId} : {} )
+      .toArray(function(err, docs) {
         // console.log(' >>>>>>> In .toArray(function(err, docs)) func!')
-        resolve(err || docs);
+        docs && resolve(docs) || reject(err);
       })
     })
     .then(result => samples=result);

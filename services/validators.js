@@ -22,8 +22,8 @@ const updateValidator = validator({
 
 const addSampleValidator = validator({
   title: { type: 'string', required: true },
-  summary: { type: 'string', required: true },
-  sampleType: { type: 'string', required: true },
+  // summary: { type: 'string', required: true },
+  // sampleType: { type: 'string', required: true },
   cases: { type: 'array', required: true }
 })
 

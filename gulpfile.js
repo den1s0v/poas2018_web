@@ -57,7 +57,7 @@ gulp.task('schemamon', done => {
 })
 
 gulp.task('dev', gulp.series('schemamon', async () => {
-    const mongoClient = await mongodb.connect(config.mongoURL);
+    const mongoClient = await mongodb.connect(config.mongoURL, { useNewUrlParser: true });
     console.log('SCHEMAMON: Successful connection to Mongo');
     const db = mongoClient.db(config.mongodbName);
 
