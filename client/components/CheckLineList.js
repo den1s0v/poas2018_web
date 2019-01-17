@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import ReactDOM from "react-dom";
 import { hot } from "react-hot-loader/root";
 import { Table, ProgressBar } from "react-bootstrap";
 
@@ -26,7 +25,7 @@ class CheckLineList extends Component {
       
     return (
       <>
-        <ProgressBar striped variant="success" now={1*cases} label={`${1*cases} шт`} />
+        <ProgressBar striped variant="success" now={1*cases.length} label={`${1*cases.length} шт`} />
         <br />
 
         <Table striped hover size="sm">
@@ -38,7 +37,7 @@ class CheckLineList extends Component {
             </tr>
           </thead>
           <tbody>
-             { /* samples[0]. */cases.map(case_line => ReactDOM.render( <CheckLine {...{isEdit:true, ...case_line}} /> )) }
+             { cases.map(case_line => ( <CheckLine {...{isEdit:true, ...case_line}} /> )) }
           </tbody>
         </Table>
       </>
