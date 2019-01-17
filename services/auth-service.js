@@ -22,7 +22,7 @@ function verifyToken(request, response, next) {
 }
 
 function createToken(userFromDB) {
-  const token = jwt.sign({ id: userFromDB.insertedId }, config.secret, {
+  const token = jwt.sign({ id: userFromDB.insertedId || userFromDB._id }, config.secret, {
     expiresIn: 86400
   })
   // const token = jwt.sign({ email: userFromDB.email }, config.secret, {
