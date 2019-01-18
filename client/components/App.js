@@ -35,7 +35,10 @@ class App extends Component {
     return (
       <>
       <CheckLineList cases={ samples && samples[0].obj.cases || [] } />
-      
+      < Route path="/" exact componet={Home} />
+      < Route path="/user" componet={ () => <Users show={true}/>} />
+      < Route path="/user" componet={ () => <Users2 show={true}/>} />
+			{this.state.redirect && <Redirect to="/" />}
       </>
     )
   }
