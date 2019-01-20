@@ -1,13 +1,13 @@
 import React, { Component } from "react";
 import { hot } from "react-hot-loader/root";
 // import { Button } from "react-bootstrap";
-// import { NavBar } from "./NavBar";
-// import { BrowserRouter as Router, Route, Link } from "react-router-dom"
+import { NavBar } from "./NavBar";
+import { BrowserRouter as Router, Route, Link } from "react-router-dom"
 
 // import 'bootstrap/dist/css/bootstrap.css'
 
-// import { Login } from "./Login";
-// import { Index } from "./Index";
+import { Login } from "./Login";
+import { Index } from "./Index";
 import CheckLineList  from "./CheckLineList";
 
 console.log('index begin');
@@ -34,11 +34,15 @@ class App extends Component {
     
     return (
       <>
-      <CheckLineList cases={ samples && samples[0].obj.cases || [] } />
-      < Route path="/" exact componet={Home} />
-      < Route path="/user" componet={ () => <Users show={true}/>} />
-      < Route path="/user" componet={ () => <Users2 show={true}/>} />
-			{this.state.redirect && <Redirect to="/" />}
+        <Index />
+        <Route path="/" component={NavBar} />
+        <Route path="/login" exact component={ () => <Login show={true}/>} />
+        
+        <CheckLineList cases={ samples && samples[0].obj.cases || [] } />
+        {/* 
+        < Route path="/user" component={ () => <Users show={true}/>} />
+        {this.state.redirect && <Redirect to="/" />}
+         */}
       </>
     )
   }
@@ -61,9 +65,9 @@ class App extends Component {
   componentWillUnmount() {
     
     console.log('component App WillUnmount');
-    if(this.cancelableRecieve)
+    if(this.cancelableRecieve) {
       this.cancelableRecieve.cancel();
-    
+    }
   }
 }
 export default hot(App);

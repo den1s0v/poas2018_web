@@ -4,6 +4,6 @@ import React from "react";
 
 export function Index(params) {
   return (
-    <h1>Regexp tester</h1>
+    <h1>[Regexp Quiz] <small>Регулярные задачки</small></h1>
   );
 }
