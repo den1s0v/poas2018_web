@@ -7,7 +7,7 @@ import { BrowserRouter as Router, Route, Link } from "react-router-dom"
 // import 'bootstrap/dist/css/bootstrap.css'
 
 import { Login } from "./Login";
-import { Index } from "./Index";
+// import { Index } from "./Index";
 import CheckLineList  from "./CheckLineList";
 
 console.log('index begin');
@@ -34,12 +34,12 @@ class App extends Component {
     
     return (
       <>
-        <Index />
         <Route path="/" component={NavBar} />
         <Route path="/login" exact component={ () => <Login show={true}/>} />
         
-        <CheckLineList cases={ samples && samples[0].obj.cases || [] } />
+        <CheckLineList cases={ samples && samples[0].obj.cases || [] } isEdit={true} />
         {/* 
+        <Index />
         < Route path="/user" component={ () => <Users show={true}/>} />
         {this.state.redirect && <Redirect to="/" />}
          */}
