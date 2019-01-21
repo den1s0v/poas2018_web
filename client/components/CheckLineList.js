@@ -20,6 +20,7 @@ class CheckLineList extends Component {
     // read props
     const {
       cases,
+      isEdit // = false
     } = this.props;
     console.log('component CheckLineList render():', cases && cases.length,'cases.');
       
@@ -39,11 +40,14 @@ class CheckLineList extends Component {
             </tr>
           </thead>
           <tbody>
-            { cases.map(case_line => ( <CheckLine {...{
-                isEdit:true, 
-                key:(i+=1,i), //  as listIndex 
-                case_line
-              }} /> )) }
+            { cases.map(case_line => ( 
+                <CheckLine {...{
+                  isEdit, 
+                  key:(i+=1,i), //  as listIndex 
+                  case_line
+                  }} /> 
+              ))
+            }
           </tbody>
         </Table>
       </>

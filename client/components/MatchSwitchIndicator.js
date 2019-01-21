@@ -26,6 +26,7 @@ class ToggleButtonGroupControlled extends React.Component {
     const {
       buttons,
       listIndex,
+      disabled
     } = this.props;
     return (
       <ToggleButtonGroup
@@ -36,7 +37,7 @@ class ToggleButtonGroupControlled extends React.Component {
         onChange={this.handleChange}
       >
       {buttons.map( (btn) => {
-        return <ToggleButton key={btn.index} value={btn.index} variant={(btn.index===this.state.value?'':"outline-")+btn.style}>
+        return <ToggleButton key={btn.index} value={btn.index} variant={(btn.index===this.state.value?'':"outline-")+btn.style}  disabled={disabled}>
           {btn.index===this.state.value? <u><b>{btn.name}</b></u> : <i>{btn.name}</i>}
         </ToggleButton>
       })}
@@ -46,7 +47,7 @@ class ToggleButtonGroupControlled extends React.Component {
 }
 
 
-export function renderMatchSwitch(mode, listIndex) {
+export function renderMatchSwitch(mode, listIndex, isEdit) {
   
   const i = [true, null, false].indexOf(mode);
   const mode_names = ["Совпадает","Авто","Не совпадает"];
@@ -54,15 +55,17 @@ export function renderMatchSwitch(mode, listIndex) {
 
   let btns = [];
   [0,1,2].forEach( (item, index) => {
-    btns.push({
-      index,
-      name: mode_names[index],
-      style: mode_styles[index],
-    });
+    if(isEdit || index === i) {
+      btns.push({
+        index,
+        name: mode_names[index],
+        style: mode_styles[index],
+      });
+    }
   })
   
   return (
-    <ToggleButtonGroupControlled buttons={btns} listIndex={listIndex} value={i} />
+    <ToggleButtonGroupControlled buttons={btns} listIndex={listIndex} disabled={!isEdit} value={i} />
   );
 }
 

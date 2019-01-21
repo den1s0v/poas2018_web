@@ -6,7 +6,7 @@ import { ToggleButtonGroup, ToggleButton } from "react-bootstrap";
 
 import { renderMatchSwitch } from "./MatchSwitchIndicator";
 
-// import { NavBar } from "./NavBar";
+import CaseInput from "./CaseInput";
 // import { BrowserRouter as Router, Route, Link } from "react-router-dom"
 
 // import 'bootstrap/dist/css/bootstrap.css'
@@ -35,8 +35,14 @@ class CheckLine extends Component {
     const mustMatch = match;
     
     console.log('component CheckLine render():str',str,'of', str && str.length,'chars.');
-      
-    const isOk = isOkMatch===undefined? <b>???</b> : ( isOkMatch? (<>OK</>) : <b><i>Fail</i></b> );
+    
+    const fail_text = () => {
+      if(isEdit) return "Wrong";
+      const spells = ['Нет','Не так','Неверно','Не подходит','Нет же','Не то'];
+      return spells[Math.floor(Math.random() * spells.length)];
+    };
+    
+    const isOk = isOkMatch===undefined? <b>???</b> : ( isOkMatch? (<>OK</>) : <b><i>{fail_text()}</i></b> );
     const row_class = isOkMatch===undefined? "default" : ( isOkMatch? "success" : "danger" );
 
     // // console.log('component CheckLine render():debug.',{isOkMatch,mustMatch,listIndex,isEdit});
@@ -49,7 +55,7 @@ class CheckLine extends Component {
           { str ? <span style={{"float":"right"}}>Длина: {str.length}</span> : "" }
         </td>
         <td>
-          { renderMatchSwitch(mustMatch, listIndex) }
+          { renderMatchSwitch(mustMatch, listIndex, isEdit) }
         </td>
         <td>
           { isEdit && <Button variant="outline-danger"><big>x</big></Button> }
