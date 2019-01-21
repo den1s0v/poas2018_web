@@ -51,7 +51,12 @@ class CheckLine extends Component {
       <tr className={"table-"+row_class} /* key={listIndex} */>
         <td>{isOk}</td>
         <td>
-          <tt>{str? (<big>{"“"+str+"”"}</big>) : (<i>= no text specified =</i>)}</tt>
+          {
+            isEdit ?
+            <CaseInput case_line={case_line} />
+            :
+            <tt>{str? (<big>{"“"+str+"”"}</big>) : (<i>= no text specified =</i>)}</tt>
+          }
           { str ? <span style={{"float":"right"}}>Длина: {str.length}</span> : "" }
         </td>
         <td>
