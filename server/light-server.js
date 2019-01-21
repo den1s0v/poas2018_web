@@ -29,6 +29,12 @@ class LightServer {
         this.end(JSON.stringify(obj, null, 2));
       }
       const pathname = url.parse(request.url).pathname.toLowerCase();
+      // //
+      // new Promise((resolve,reject) => {
+        // console.log(request.method,'\t:\t',pathname);
+        // resolve();
+      // }
+      // //
       for (const reqElem of this[requestArray]) {
         const requestKeys = [];
         const requestRegexp = pathToRegexp(reqElem.url, requestKeys);
