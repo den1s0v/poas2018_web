@@ -20,44 +20,48 @@ class CheckLine extends Component {
     const {
       isEdit,
       case_line,
+      onCaseChanged,
+      listIndex,
       key,
     } = this.props;
-    const {
-      str,
-    } = case_line;
+    
+    const str = case_line.str();
     
     // match: re.test(this.str),
     // db_match: db_re.test(this.str),
     const {match, db_match} = case_line.test();
 
-    const listIndex = key || 0;
+    /// / const listIndex = key || 0;
     const isOkMatch = db_match === match;
-    const mustMatch = match;
+    const mustMatch = db_match;
     
-    console.log('component CheckLine render():str',str,'of', str && str.length,'chars.');
+    // console.log('component CheckLine render():str',str,'of', str && str.length,'chars.');
     
     const fail_text = () => {
       if(isEdit) return "Wrong";
-      const spells = ['Нет','Не так','Неверно','Не подходит','Нет же','Не то'];
+      const spells = ['Нет','Не так','Неверно','Плохо','Нет же','Не то'];
       return spells[Math.floor(Math.random() * spells.length)];
     };
     
     const isOk = isOkMatch===undefined? <b>???</b> : ( isOkMatch? (<>OK</>) : <b><i>{fail_text()}</i></b> );
     const row_class = isOkMatch===undefined? "default" : ( isOkMatch? "success" : "danger" );
 
-    // // console.log('component CheckLine render():debug.',{isOkMatch,mustMatch,listIndex,isEdit});
+    console.log('component CheckLine render():debug.',{isOkMatch,mustMatch,listIndex,isEdit});
 
+    // wrap callback
+    const onChangeHandler = (new_value) => onCaseChanged(new_value,listIndex);
+    
     return (
       <tr className={"table-"+row_class} /* key={listIndex} */>
         <td>{isOk}</td>
         <td>
           {
             isEdit ?
-            <CaseInput case_line={case_line} />
+            <CaseInput case_line={case_line} onUpdate={onChangeHandler} />
             :
             <tt>{str? (<big>{"“"+str+"”"}</big>) : (<i>= no text specified =</i>)}</tt>
           }
-          { str ? <span style={{"float":"right"}}>Длина: {str.length}</span> : "" }
+          { str ? <span style={{"float":"right"}}>Длина '{str}': {str.length}</span> : "" }
         </td>
         <td>
           { renderMatchSwitch(mustMatch, listIndex, isEdit) }

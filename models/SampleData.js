@@ -38,11 +38,17 @@ class SampleData /* extends Model */ {
 }
 
 function SampleCase(case_line, dbObj, editableObj) {
-  this.str = case_line.str;
-  this._id = case_line._id;
+  this.case_line = case_line;
   // дополнительные данные
   this.db_sample = dbObj;
   this.editable_sample = editableObj;
+  
+  this.str = () => {
+    return this.case_line.str;
+  };
+  this.setStr = (new_str) => {
+    this.case_line.str = new_str;
+  };
   
   this.test = (re_pattern) => {
     if((typeof re_pattern !== 'string') && ! (re_pattern instanceof RegExp)) {
@@ -53,8 +59,8 @@ function SampleCase(case_line, dbObj, editableObj) {
     const db_re = new RegExp(this.db_sample.regex);
     // // console.log({re,db_re});
     return {
-      match: re.test(this.str),
-      db_match: db_re.test(this.str),
+      match: re.test(this.case_line.str),
+      db_match: db_re.test(this.case_line.str),
     }
   };
   

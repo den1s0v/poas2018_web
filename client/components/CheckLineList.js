@@ -9,21 +9,34 @@ class CheckLineList extends Component {
   constructor(props, context) {
     super(props, context);
 
-    // this.handleChange = this.handleChange.bind(this);
+    // this.onCaseChanged = this.onCaseChanged.bind(this);
 
-    this.state = {
-      cases: props.cases
-    };
+    // this.state = {
+      // cases: props.cases
+    // };
   }
+
+/*   onCaseChanged(new_value, case_index) {
+    console.log('component CheckLineList onCaseChanged():', new_value);
+    // set new value !?
+    case_line.str = new_value;
+    // fire update ?
+    // this.onUpdate(onUpdate, this.props.case_line);
+    
+    // update all children
+    this.setState({});
+  } */
 
   render() {
     // read props
     const {
       cases,
-      isEdit // = false
+      onCaseChanged,
+      isEdit, // = false
     } = this.props;
+    // const cases = this.state.cases;
     console.log('component CheckLineList render():', cases && cases.length,'cases.');
-      
+    
     let i = 0;
       
     return (
@@ -43,9 +56,11 @@ class CheckLineList extends Component {
             { cases.map(case_line => ( 
                 <CheckLine {...{
                   isEdit, 
-                  key:(i+=1,i), //  as listIndex 
-                  case_line
-                  }} /> 
+                  listIndex:i, //  as listIndex 
+                  key:(i+=1,i), // !! bad key.
+                  case_line,
+                  onCaseChanged,
+                }} /> 
               ))
             }
           </tbody>

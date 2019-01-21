@@ -8,7 +8,7 @@ import { BrowserRouter as Router, Route, Link } from "react-router-dom"
 
 import { Login } from "./Login";
 // import { Index } from "./Index";
-import CheckLineList  from "./CheckLineList";
+import SamplePanel  from "./SamplePanel";
 
 console.log('index begin');
 
@@ -26,10 +26,7 @@ class App extends Component {
     };
   }
   render() {
-    // read props
-    const {
-      samples,
-    } = this.state;
+    const samples = this.state.samples;
     console.log('component App render():', samples && samples.length || 0,'samples.');
     
     return (
@@ -37,7 +34,7 @@ class App extends Component {
         <Route path="/" component={NavBar} />
         <Route path="/login" exact component={ () => <Login show={true}/>} />
         
-        <CheckLineList cases={ samples && samples[0].obj.cases || [] } isEdit={true} />
+        <SamplePanel sample={ samples && samples[0] } isEdit={true} />
         {/* 
         <Index />
         < Route path="/user" component={ () => <Users show={true}/>} />
