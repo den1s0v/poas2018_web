@@ -33,7 +33,7 @@ class CheckLine extends Component {
 
     /// / const listIndex = key || 0;
     const isOkMatch = db_match === match;
-    const mustMatch = db_match;
+    const mustMatch = match;
     
     // console.log('component CheckLine render():str',str,'of', str && str.length,'chars.');
     
@@ -46,7 +46,7 @@ class CheckLine extends Component {
     const isOk = isOkMatch===undefined? <b>???</b> : ( isOkMatch? (<>OK</>) : <b><i>{fail_text()}</i></b> );
     const row_class = isOkMatch===undefined? "default" : ( isOkMatch? "success" : "danger" );
 
-    console.log('component CheckLine render():debug.',{isOkMatch,mustMatch,listIndex,isEdit});
+    // console.log('component CheckLine render():debug.',{str,isOkMatch,mustMatch,listIndex,isEdit});
 
     // wrap callback
     const onChangeHandler = (new_value) => onCaseChanged(new_value,listIndex);

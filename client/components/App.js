@@ -34,7 +34,7 @@ class App extends Component {
         <Route path="/" component={NavBar} />
         <Route path="/login" exact component={ () => <Login show={true}/>} />
         
-        <SamplePanel sample={ samples && samples[0] } isEdit={true} />
+        <SamplePanel sample={ samples && samples[0] } isEdit={false} />
         {/* 
         <Index />
         < Route path="/user" component={ () => <Users show={true}/>} />

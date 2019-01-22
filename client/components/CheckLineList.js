@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { hot } from "react-hot-loader/root";
-import { Table, ProgressBar } from "react-bootstrap";
+import { Table } from "react-bootstrap";
 
 // import 'bootstrap/dist/css/bootstrap.css'
 import CheckLine  from "./CheckLine";
@@ -35,14 +35,12 @@ class CheckLineList extends Component {
       isEdit, // = false
     } = this.props;
     // const cases = this.state.cases;
-    console.log('component CheckLineList render():', cases && cases.length,'cases.');
+    // console.log('component CheckLineList render():', cases && cases.length,'cases.');
     
     let i = 0;
       
     return (
       <>
-        <ProgressBar striped variant="success" now={10*cases.length} label={`${1*cases.length} шт`} />
-        <br />
 
         <Table striped hover size="sm">
           <thead>
@@ -50,6 +48,7 @@ class CheckLineList extends Component {
               <th>\</th>
               <th>Проверочная строка</th>
               <th>Совпадение</th>
+              <th>Убрать</th>
             </tr>
           </thead>
           <tbody>
