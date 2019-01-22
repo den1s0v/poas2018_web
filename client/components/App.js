@@ -12,8 +12,8 @@ import SamplePanel  from "./SamplePanel";
 
 console.log('index begin');
 
-const SampleData = require('../../models/SampleData');
-const makeCancelable = require('../../services/make-promise-cancelable');
+import SampleData from '../../models/SampleData';
+import makeCancelable from '../../services/make-promise-cancelable';
 
 
 
