@@ -2,6 +2,6 @@ import React from "react";
 
 export function Login(params) {
   return (
-    <h4>...Login zone...</h4>
+    <h3>...Login zone...</h3>
   );
 }
