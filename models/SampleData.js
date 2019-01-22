@@ -19,9 +19,13 @@ class SampleData /* extends Model */ {
     this.obj.cases = this.dbObj.cases.map(v => new SampleCase(v, this.dbObj, this.obj));
   }
   
-  constructRegex(re_pattern) {
-    
-    return false;
+  getSolvedCount() {
+    const ok_cases = this.obj.cases.reduce((a, case_line) => {
+      const {match,db_match} = case_line.test();
+      console.log({a,match,db_match});
+      return a + ((match===db_match)? 1 : 0);
+    }, 0);
+    return ok_cases; // this.obj.cases.length;
   }
   
   /** returns boolean */
