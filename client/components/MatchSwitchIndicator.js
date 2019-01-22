@@ -20,7 +20,6 @@ class ToggleButtonGroupControlled extends React.Component {
     
     // console.log('component ToggleButtonGroupControlled WillRecieveProps:',{new_props});
     if(this.state.value !== new_props.value) {
-      console.log('component SamplePanel ToggleButtonGroupControlled:','will update!');
       this.setState({value:new_props.value});
     }
   }

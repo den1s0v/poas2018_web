@@ -17,9 +17,17 @@ class SamplePanel extends Component {
     super(props, context);
 
     this.onCaseChanged = this.onCaseChanged.bind(this);
+    this.onCaseAddRemove = this.onCaseAddRemove.bind(this);
     this.onSampleChanged = this.onSampleChanged.bind(this);
+    
+    let sample = props.sample;
+    if(sample && !props.isEdit) {
+      // Обнулить регулярное выражение, которое мы хотим получить от пользователя
+      sample.obj.regex = '';
+    }
+    
     this.state = {
-      sample: props.sample
+      sample: sample
     };
     console.log('component SamplePanel created:', this.state.sample);
     
@@ -35,6 +43,28 @@ class SamplePanel extends Component {
     this.setState({sample});
   }
 
+  onCaseAddRemove(mode, case_index) {
+    if(mode === 'insert') {
+      // insert next to current case ...
+      const sample = this.state.sample;
+      // insert one
+      sample.addOne('new-test-case', case_index + 1);
+      // update
+      this.setState({sample});
+      return;
+    }
+    if(mode === 'remove') {
+      // remove current case ...
+      const sample = this.state.sample;
+      // remove one
+      sample.removeOne( case_index );
+      // update
+      this.setState({sample});
+      return;
+    }
+    console.log('component SamplePanel onCaseAddRemove(): unknown mode:', {mode, case_index});
+  }
+
   onSampleChanged(new_value, mode = 'regex') {
     console.log('component SamplePanel onSampleChanged():', new_value);
     if(['regex','title'].includes(mode)) {
@@ -46,6 +76,9 @@ class SamplePanel extends Component {
       }
       // update state & all children
       this.setState({sample});
+      
+      // // // debugging send to server
+      // // sample.sendChanges();
     }
   }
 
@@ -54,7 +87,15 @@ class SamplePanel extends Component {
     // console.log('component SamplePanel WillRecieveProps:',{new_props});
     if(this.state.sample !== new_props.sample) {
       console.log('component SamplePanel WillRecieveProps:','will update!');
-      this.setState({sample:new_props.sample});
+      let sample = new_props.sample;
+      if(sample && !new_props.isEdit) {
+        // Обнулить регулярное выражение, которое мы хотим получить от пользователя
+        sample.obj.regex = '';
+      }
+      
+      this.setState({
+        sample: sample
+      });
     }
   }
 
@@ -88,7 +129,7 @@ class SamplePanel extends Component {
         />
         {
           !this.props.isEdit ?
-          (<i>Подберите такое регулярное выражение, чтобы тестовые строки <b>правильно</b> совпадали/<u>не</u> совпадали</i>)
+          (<i><p/>Подберите такое регулярное выражение, чтобы тестовые строки <b>правильно</b> совпадали/<u>не</u> совпадали</i>)
           : ''
         }
         {
@@ -104,6 +145,7 @@ class SamplePanel extends Component {
           cases={ sample ? sample.obj.cases : [] }
           isEdit={this.props.isEdit}
           onCaseChanged={this.onCaseChanged}
+          onCaseAddRemove={this.onCaseAddRemove}
         />
       </>
     )

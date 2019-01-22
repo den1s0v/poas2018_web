@@ -17,11 +17,19 @@ class CaseInput extends Component {
     // this.state = { case_line: props.case_line }; // lift the state up
   }
   
+  componentWillReceiveProps(new_props) {
+    
+    // console.log('component ToggleButtonGroupControlled WillRecieveProps:',{new_props});
+    if(this.input.current.value !== new_props.case_line.str()) {
+      this.input.current.value = new_props.case_line.str();
+    }
+  }
+
   onStrChange() {
       // (event) => console.log('FormControl onChange:',event.target.value)
       // ^ `controlled` style of using child component ^
     const new_value = this.input.current.value; // get value from `uncontrolled` component
-    console.log('FormControl onStrChange:',new_value);
+    // console.log('FormControl onStrChange:',new_value);
     // set new value !?
     // this.props.case_line.str = new_value;
     // fire update
@@ -29,26 +37,11 @@ class CaseInput extends Component {
   }
   
   render() {
-    // read props
-    const {
-      // case_line,
-      // isEdit // = false
-    } = this.props;
     // console.log('component CaseInput render(). case_line: ', this.props.case_line);
       
     let i = 0;
     /* 
-            value={this.props.case_line.str}
-
-            onKeyUp={(...param) => console.log('FormControl onKeyUp:',param)}
-            buttonAfter={(...param) => console.log('FormControl buttonAfter:',param)}
-
-          <InputGroup.Append>
-            <Button variant="outline-success" onClick={() => this.handleButton(true)}
-              >OK</Button>
-            <Button type="submit" variant="outline-secondary" onClick={() => this.handleButton(false)}
-              >Сбросить</Button>
-          </InputGroup.Append>
+            value={this.props.case_line.str()}
     */
     return (
       <>

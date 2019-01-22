@@ -32,6 +32,7 @@ class CheckLineList extends Component {
     const {
       cases,
       onCaseChanged,
+      onCaseAddRemove,
       isEdit, // = false
     } = this.props;
     // const cases = this.state.cases;
@@ -48,7 +49,7 @@ class CheckLineList extends Component {
               <th>\</th>
               <th>Проверочная строка</th>
               <th>Совпадение</th>
-              <th>Убрать</th>
+              {isEdit ? (<th>Управл.</th>) : ''}
             </tr>
           </thead>
           <tbody>
@@ -59,6 +60,7 @@ class CheckLineList extends Component {
                   key:(i+=1,i), // !! bad key.
                   case_line,
                   onCaseChanged,
+                  onCaseAddRemove,
                 }} /> 
               ))
             }

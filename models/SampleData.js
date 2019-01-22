@@ -22,24 +22,51 @@ class SampleData /* extends Model */ {
   getSolvedCount() {
     const ok_cases = this.obj.cases.reduce((a, case_line) => {
       const {match,db_match} = case_line.test();
-      console.log({a,match,db_match});
       return a + ((match===db_match)? 1 : 0);
     }, 0);
     return ok_cases; // this.obj.cases.length;
   }
   
+  addOne(str, insert_index) {
+    // insert next to current case ...
+    // make a new case_line
+    const new_case_line = new SampleCase(
+      { str:str , /* !! _id:this.dbObj.getNewObjectId() */ }, 
+      this.dbObj, this.obj
+    ); 
+      //// Object.assign({}, sample.obj.cases[case_index]);
+    // insert one
+    this.obj.cases.splice( insert_index , 0 , new_case_line);
+  }
+  removeOne(remove_index) {
+    // remove one
+    this.obj.cases.splice( remove_index , 1 );
+  }
+
   /** returns boolean */
-  /* async */ sendChanges() {
+  /* async */
+  sendChanges() {
 	
-    // fetch('/api/sample/update', {
-      // method: 'POST',
-      // body: JSON.stringify({token: id_token}),
-      // headers: /* JSONHeader */ new Headers({"Content-Type": "application/json"})
-    // }).then(response => response.json()).then(userInfo => {
-      // alert(JSON.stringify(userInfo, null, 2));
-    // });	  
+  const data = Object.assign({}, this.obj);
+  // filter cases` fields
+  data.cases = data.cases.map(v => {
+    return {str:v.case_line.str, _id:v.case_line._id};
+  });
+
+  
+    fetch('/api/sample/update', {
+      method: 'POST',
+      body: JSON.stringify(data),
+      headers: /* JSONHeader */ new Headers({"Content-Type": "application/json"})
+    }).then(response => response.json()).then(status => {
+      /* console.log */ alert(JSON.stringify(status, null, 2));
+    });	
+
+    console.log('we have sent',data);
   }
 }
+
+SampleData.SampleCase = SampleCase;
 
 function SampleCase(case_line, dbObj, editableObj) {
   this.case_line = case_line;

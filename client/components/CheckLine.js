@@ -21,6 +21,7 @@ class CheckLine extends Component {
       isEdit,
       case_line,
       onCaseChanged,
+      onCaseAddRemove,
       listIndex,
       key,
     } = this.props;
@@ -66,9 +67,20 @@ class CheckLine extends Component {
         <td>
           { renderMatchSwitch(mustMatch, listIndex, isEdit) }
         </td>
-        <td>
-          { isEdit && <Button variant="outline-danger"><big>x</big></Button> }
-        </td>
+        {isEdit ? (
+          <td>
+            {  // Запрещаем удалять, если всего 2 пункта (позитивн. + негативн. тесты)
+              case_line.editable_sample.cases.length > 2 ?
+              (<Button variant="outline-danger"
+                onClick={()=>onCaseAddRemove('remove',listIndex)}
+              ><b><big>x</big></b></Button>)
+              : ''
+            }
+            <Button variant="outline-success"
+              onClick={()=>onCaseAddRemove('insert',listIndex)}
+            ><b><big>+</big></b></Button>
+          </td>
+        ) : ''}
       </tr>
     )
   }
