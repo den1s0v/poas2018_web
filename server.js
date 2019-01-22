@@ -24,9 +24,8 @@ app.use(webpackDevMiddleware(compiler, {
     publicPath: webpackConfig.output.publicPath
 }));
 
-// const publicDir = './public';
-
-// app.use(lightServer.static(publicDir))
+const publicDir = './public';
+app.use(lightServer.static(publicDir))
 
 app.use(requestParser);
 app.post('/api/signup', validators.signupValidator, UsersController.CreateUser)
