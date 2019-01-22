@@ -30,10 +30,10 @@ class LightServer {
       }
       const pathname = url.parse(request.url).pathname.toLowerCase();
       // //
-      // new Promise((resolve,reject) => {
-        // console.log(request.method,'\t:\t',pathname);
-        // resolve();
-      // }
+      new Promise((resolve,reject) => {
+        console.log(request.method,'\t:\t',pathname);
+        resolve();
+      });
       // //
       for (const reqElem of this[requestArray]) {
         const requestKeys = [];
