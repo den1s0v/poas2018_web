@@ -16,6 +16,15 @@ class ToggleButtonGroupControlled extends React.Component {
     };
   }
 
+  componentWillReceiveProps(new_props) {
+    
+    // console.log('component ToggleButtonGroupControlled WillRecieveProps:',{new_props});
+    if(this.state.value !== new_props.value) {
+      console.log('component SamplePanel ToggleButtonGroupControlled:','will update!');
+      this.setState({value:new_props.value});
+    }
+  }
+
   handleChange(e) {
     console.log('radio changed:',e);
     this.setState({ value: e });
@@ -49,13 +58,18 @@ class ToggleButtonGroupControlled extends React.Component {
 
 export function renderMatchSwitch(mode, listIndex, isEdit) {
   
-  const i = [true, null, false].indexOf(mode);
-  const mode_names = ["Совпадает","Авто","Не совпадает"];
-  const mode_styles = ['success', 'warning', 'danger']; // ['success', 'danger', 'default'];
+  // // Вариант с 3 кнопками
+  // const i = [true, null, false].indexOf(mode);
+  // const mode_names = ["Совпадает","Авто","Не совпадает"];
+  // const mode_styles = ['success', 'warning', 'danger']; // ['success', 'danger', 'default'];
+
+  const i = [true, false].indexOf(mode);
+  const mode_names = ["Совпадает","Не совпадает"];
+  const mode_styles = ['success', 'warning'];
 
   let btns = [];
-  [0,1,2].forEach( (item, index) => {
-    if(isEdit || index === i) {
+  [0,1].forEach( (item, index) => {
+    if(/* isEdit || */ index === i) {
       btns.push({
         index,
         name: mode_names[index],
@@ -65,7 +79,7 @@ export function renderMatchSwitch(mode, listIndex, isEdit) {
   })
   
   return (
-    <ToggleButtonGroupControlled buttons={btns} listIndex={listIndex} disabled={!isEdit} value={i} />
+    <ToggleButtonGroupControlled buttons={btns} listIndex={listIndex} disabled={true/* !isEdit */} value={i} />
   );
 }
 

@@ -57,7 +57,6 @@ class CaseInput extends Component {
             placeholder="Проверочная строка"
             aria-label="Проверочная строка (2)"
             aria-describedby="basic-addon2"
-            
             defaultValue={this.props.case_line.str()}
             onChange={this.onStrChange}
             ref={this.input}
