@@ -11,6 +11,7 @@ const SampleController = {
   SampleTestFunc,
   CreateSample,
   GetSamples,
+  SaveSample,
 }
 
 injectModelsToActions(SampleController, SampleModel);
@@ -75,5 +76,24 @@ async function GetSamples(request, response, next, Sample) {
     });
     
   response.json(allSamples);
+  next();
+}
+
+async function SaveSample(request, response, next, Sample) {
+  const data = request.body;
+  // const valid = ['all','my','quiz'].includes(options.mode) && 
+				// (options.mode === 'all' || options.userId);
+  // if( ! valid ) {
+	  // // 412 Precondition Failed («условие ложно»)
+    // response.status(412).json({
+      // error: "Wrong request options"
+    // })
+  // }
+  
+  console.log('recieved data:',data);
+  
+  const status = {ok: true};
+    
+  response.json(status);
   next();
 }

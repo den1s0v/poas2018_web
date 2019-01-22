@@ -66,7 +66,7 @@ class SampleData /* extends Model */ {
   }
 }
 
-SampleData.SampleCase = SampleCase;
+// SampleData.SampleCase = SampleCase;
 
 function SampleCase(case_line, dbObj, editableObj) {
   this.case_line = case_line;
@@ -101,9 +101,9 @@ function SampleCase(case_line, dbObj, editableObj) {
 
 // SampleData.fetchSamples = f_fetchSamples;
 
-  /** returns SampleData[]
-	mode: ['all','my','quiz']
-  */
+/** returns SampleData[]
+mode: ['all','my','quiz']
+*/
 function f_fetchSamples({userId, mode='all'} = {}) {
 	
   console.log('fetchSamples: options:',{userId, mode});
