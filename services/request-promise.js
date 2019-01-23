@@ -5,7 +5,7 @@ module.exports = {
     get(url) {
 
         return new Promise( (resolve, reject) => {
-            requestClient.get(ur, (err, response, body) => {
+            requestClient.get(url, (err, response, body) => {
                 if(err) {
                     reject(err);
                 } else  {

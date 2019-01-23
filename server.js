@@ -38,16 +38,22 @@ app.patch('/api/users/:login', validators.updateValidator, verifyToken, UsersCon
 app.get('/test', SamplesController.SampleTestFunc);
 // </debug-test>
 
+app.post('/api/auth/google', googleAuthService, UsersController.CreateGoogleUser);
+// app.get('/api/auth/vk', vkAuth, sentFakeVkPage /*, UsersController.CreateVkUser*/);
+
 app.post('/api/sample/get',   SamplesController.GetSamples);
 app.post('/api/sample/update',SamplesController.SaveSample);
 
 
-const googleTest = (request, response, next ) => {
-    const userInfo = request.userInfo;
-    response.json(userInfo);
-}
+app.post('/api/sample/new', verifyToken, validators.addSampleValidator, SamplesController.CreateSample);
 
-app.post('/api/auth/google', googleAuthService, UsersController.CreateGoogleUser);
-app.get('/api/auth/vk', vkAuth, sentFakeVkPage /*, UsersController.CreateVkUser*/);
+// app.post('/api/samples/getUserSamples', verifyToken, SamplesController.GetUserSamples);
+// app.post('/api/samples/getAllUnsolvedTasks', verifyToken, SamplesController.GetAllUnsolvedTasks);
+// app.post('/api/samples/getSolvedTasks', verifyToken, SamplesController.GetSolvedTasks);
+
+app.post('/api/samples/addSolvedSample', verifyToken, UsersController.AddSolvedSample);
+// app.post('/api/samples/addSolvedUser', verifyToken, SamplesController.AddSolvedSample);
+
+
 
 app.listen(3000);
