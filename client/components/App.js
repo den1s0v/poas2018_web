@@ -6,7 +6,7 @@ import { BrowserRouter as Router, Route, Link } from "react-router-dom"
 
 // import 'bootstrap/dist/css/bootstrap.css'
 
-import { Login } from "./Login";
+import { LoginOrSignup } from "./LoginOrSignup";
 // import { Index } from "./Index";
 import SamplePanel  from "./SamplePanel";
 
@@ -32,10 +32,11 @@ class App extends Component {
     return (
       <>
         <Route path="/" component={NavBar} />
-        <Route path="/login" exact component={ () => <Login show={true}/>} />
+        <Route path="/login" exact component={ () => <LoginOrSignup />} />
         
         <SamplePanel sample={ samples && samples[0] } isEdit={true} />
         {/* 
+          show={true}
         <Index />
         < Route path="/user" component={ () => <Users show={true}/>} />
         {this.state.redirect && <Redirect to="/" />}

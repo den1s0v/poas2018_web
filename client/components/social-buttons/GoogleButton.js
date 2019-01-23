@@ -18,7 +18,7 @@ function authGoogle(button) {
     });
 
     function attachSignin(element, auth2) {
-        console.log(element);
+        // console.log(element);
         auth2.attachClickHandler(element, {},
             function(googleUser) {
             const userInfo = "Signed in: " + googleUser.getBasicProfile().getName();
@@ -47,14 +47,14 @@ export class GoogleButton extends Component {
     //сначала выполняется render и после вызывается componentDidMount, где мы можем всякую шушеру писать
     //вызывается один раз
     componentDidMount() {
-        console.log('componentDidMount');
+        // console.log('componentDidMount');
         asyncScript('https://apis.google.com/js/api:client.js').then( () => {
             authGoogle(this.googleButtonRef.current);
         });
     }
 
     componentDidUpdate() {
-        console.log('componentDidUpdate');
+        // console.log('componentDidUpdate');
         authGoogle(this.googleButtonRef.current);
     }
 
