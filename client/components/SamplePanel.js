@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { hot } from "react-hot-loader/root";
-// import { Button } from "react-bootstrap";
+import { Button } from "react-bootstrap";
 import { Badge } from "react-bootstrap";
 import { ProgressBar } from "react-bootstrap";
 
@@ -19,6 +19,7 @@ class SamplePanel extends Component {
     this.onCaseChanged = this.onCaseChanged.bind(this);
     this.onCaseAddRemove = this.onCaseAddRemove.bind(this);
     this.onSampleChanged = this.onSampleChanged.bind(this);
+    this.onSaveNew = this.onSaveNew.bind(this);
     
     let sample = props.sample;
     if(sample && !props.isEdit) {
@@ -82,6 +83,19 @@ class SamplePanel extends Component {
     }
   }
 
+  onSaveNew() {
+    if(this.state.sample)
+      this.state.sample.sendNew();
+    else {
+      fetch('/test', {
+        method: 'GET',
+        // headers: new Headers({"Content-Type": "application/json"})
+      }).then(response => response.json()).then(status => {
+        /* console.log */ alert(JSON.stringify(status, null, 2));
+      });	
+    }
+  }
+
   componentWillReceiveProps(new_props) {
     
     // console.log('component SamplePanel WillRecieveProps:',{new_props});
@@ -116,6 +130,12 @@ class SamplePanel extends Component {
     // <small> </small>
     return (
       <>
+        <div style={{float:"left"}} >
+          <Button variant="outline-info" 
+              onClick={() => alert('Назад !')}
+            >Назад</Button>
+        </div>
+        
         <center><h4>
           {sample && sample.obj.title} &nbsp;
           <sub><Badge variant="info">{this.props.isEdit? "Правка" : "Тест"}</Badge></sub>
@@ -147,6 +167,15 @@ class SamplePanel extends Component {
           onCaseChanged={this.onCaseChanged}
           onCaseAddRemove={this.onCaseAddRemove}
         />
+        {
+          this.props.isEdit ?
+          (<Button variant="success" 
+            onClick={this.onSaveNew}
+            disabled={!sample}
+            >Сохранить и завершить редактирование
+          </Button>)
+          : ''
+        }
       </>
     )
   }
