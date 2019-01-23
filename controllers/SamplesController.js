@@ -56,9 +56,9 @@ async function CreateSample(request, response, next, Sample) {
 }  
 
 async function GetSamples(request, response, next, Sample) {
-  const options = request.body;
-  const valid = ['all','my','quiz'].includes(options.mode) && 
-				(options.mode === 'all' || options.userId);
+  let {userId, mode} = request.body;
+  const valid = ['all','my','quiz', 'done'].includes(mode) && 
+				(mode === 'all' || userId);
   if( ! valid ) {
 	  // 412 Precondition Failed («условие ложно»)
     response.status(412).json({
@@ -66,23 +66,36 @@ async function GetSamples(request, response, next, Sample) {
     })
   }
   
-  let allSamples = await Sample.allFor(options.userId)
+  if(mode === 'all') userId = null;
+  
+  const promise = ['all','my'].includes(mode)?
+    Sample.allFor(userId)
+    :
+    (
+      (mode === 'quiz')?
+      Sample.getAllUnsolvedSamples(userId)
+      :
+      Sample.getAllSolvedSamples(userId) // 'done'
+    ); 
+  
+  const samples = await promise
     .catch(e => {
       response.status(500).json({
         error: "Select error: "+e.toString()
       })
       return promiseError("Select error: "+e.toString(), 500);
-      return;
     });
     
-  response.json(allSamples);
+  console.log('GetSamples:', {samples: samples.length});
+  response.json(samples);
   next();
 }
 
+/** update */
 async function SaveSample(request, response, next, Sample) {
   const data = request.body;
-  // const valid = ['all','my','quiz'].includes(options.mode) && 
-				// (options.mode === 'all' || options.userId);
+  // const valid = ['all','my','quiz'].includes(mode) && 
+				// (mode === 'all' || userId);
   // if( ! valid ) {
 	  // // 412 Precondition Failed («условие ложно»)
     // response.status(412).json({

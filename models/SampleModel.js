@@ -1,4 +1,4 @@
-const schema = require('./schemas/sample-schema');
+const schema = require('./schemas/samples-schema');
 const Model = require('../services/init-model');
 const objectId = require('mongodb').ObjectID;
 const { promiseError } = require('../services/error-helper')
@@ -59,6 +59,39 @@ class Sample extends Model {
     .then(result => samples=result);
     // console.log(' >>>>>>> returning samples!')
     return samples;
+  }
+  async getUserSamples(userId) {
+    const samples = await this.collection.find(
+      userId ? { ownerId: new objectId(userId) } : {}
+    );
+    return samples.toArray();
+  }
+  
+  async getAllUnsolvedSamples(userId) {
+    let samples = await this.collection.find(
+      {
+        $and:[
+          { ownerId: { $ne: new objectId(userId) }},
+          { doneUsers: { $ne: new objectId(userId) } },
+          /* { errorUsers: { $ne: new objectId(userId) } } */
+        ]
+      }
+    );
+
+    return samples.toArray();
+  }
+  
+  async getSolvedSamples(userId) {
+    let samples = await this.collection.find(
+      {
+        $and:[
+          { ownerId: { $ne: new objectId(userId) }},
+          { doneUsers: { $eq: new objectId(userId) } }
+        ]
+      }
+    );
+
+    return samples.toArray();
   }
 
 }

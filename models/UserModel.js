@@ -11,20 +11,22 @@ class User extends Model {
   }
 
   save(newUser) {
-    let salt = bcryptjs.genSaltSync(10);
-    newUser.passwordHash = bcryptjs.hashSync(newUser.password, salt);
+    if ( newUser.password) {
+      let salt = bcryptjs.genSaltSync(10);
+      newUser.passwordHash = bcryptjs.hashSync(newUser.password, salt);
+    }
     newUser.isAdmin = false;
     delete newUser.password;
     return this.collection.insertOne(newUser)
   }
 
   login(loginUser) {
-    const { login, email, password } = loginUser;
-    const loginQuery = login ? { login } : (email ? { email } : null);
+    const { email, password } = loginUser;
+    const loginQuery = email ? { email } : (password ? { password } : null);
     if (!loginQuery) {
-      return promiseError("Neither login nor email are present in the request", 403)
+      return promiseError("Neither email nor password are present in the request", 403)
     }
-    return this.collection.findOne(loginQuery).then(userFromDB => {
+    return this.collection.findOne({email}).then(userFromDB => {
       if (userFromDB) {
         if (!bcryptjs.compareSync(password, userFromDB.passwordHash)) {
           return promiseError("Wrong password", 403);
@@ -57,6 +59,11 @@ class User extends Model {
     }
   }
 
+  async isExist(email) {
+    const user = await this.collection.findOne({ email: email });
+    return user;
+  }
+  
   async isAdmin(userId) {
     const user = await this.collection.findOne({ _id: new objectId(userId) });
     return user.isAdmin;
@@ -64,6 +71,10 @@ class User extends Model {
 
   async addSample(userId, sampleId) {
     return await this.collection.updateOne({ _id: new objectId(userId) }, { $push: { samples: sampleId } });
+  }
+
+  async addSolvedSample(userId, sampleId) {
+    return await this.collection.updateOne({ _id: new objectId(userId) }, { $push: { doneSamples: sampleId } });
   }
 }
 

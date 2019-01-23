@@ -43,21 +43,42 @@ class SampleData /* extends Model */ {
     this.obj.cases.splice( remove_index , 1 );
   }
 
+  prepare4Save() {
+    const data = Object.assign({}, this.obj);
+    // filter cases` fields
+    data.cases = data.cases.map(v => {
+      return {str:v.case_line.str, _id:v.case_line._id};
+    });
+    return data;
+  }
+  
+  /** returns boolean */
+  /* async */
+  sendNew() {
+	
+    const data = this.prepare4Save();
+  
+    fetch('/api/sample/new', {
+      method: 'POST',
+      body: JSON.stringify(data),
+      headers: new Headers({"Content-Type": "application/json"})
+    }).then(response => response.json()).then(status => {
+      /* console.log */ alert('sendNew():\n' + JSON.stringify(status, null, 2));
+    });	
+
+    console.log('sendNew() has sent ',data);
+  }
+  
   /** returns boolean */
   /* async */
   sendChanges() {
 	
-  const data = Object.assign({}, this.obj);
-  // filter cases` fields
-  data.cases = data.cases.map(v => {
-    return {str:v.case_line.str, _id:v.case_line._id};
-  });
-
+    const data = this.prepare4Save();
   
     fetch('/api/sample/update', {
       method: 'POST',
       body: JSON.stringify(data),
-      headers: /* JSONHeader */ new Headers({"Content-Type": "application/json"})
+      headers: new Headers({"Content-Type": "application/json"})
     }).then(response => response.json()).then(status => {
       /* console.log */ alert(JSON.stringify(status, null, 2));
     });	
@@ -119,4 +140,7 @@ function f_fetchSamples({userId, mode='all'} = {}) {
 }
 
 
-module.exports = { SampleData , fetchSamples : f_fetchSamples };
+module.exports = {
+  SampleData,
+  fetchSamples : f_fetchSamples
+};

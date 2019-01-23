@@ -3,26 +3,19 @@ module.exports = {
   schema: {
 		$jsonSchema: {
 			type: 'object',
-			required: ['login', 'email', 'passwordHash', 'isPrivate', 'isAdmin', 'isActive'],
+			required: ['email', 'passwordHash', 'isAdmin'],
 			properties: {
 				_id: {
 					bsonType: 'objectId'
 				},
-				login: {
-					type: 'string',
-					description: 'must be a string and is required'
-				},
 				email: {
 					type: 'string',
-					pattern: '@yandex\\.ru$',
+					pattern: '.+@.+\\..+$',
 					description: 'must be a string, is required and match to the pattern'
 				},
 				passwordHash: {
 					type: 'string',
 					description: 'must be a string and is required'
-				},
-				isPrivate: {
-					type: 'boolean'
 				},
 				isAdmin: {
 					type: 'boolean'

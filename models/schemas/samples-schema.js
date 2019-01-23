@@ -1,7 +1,7 @@
 module.exports = {
   $jsonSchema: {
     type: 'object',
-    required: ['_id', /*'title', 'regex', /*'sampleType', 'ownerId', 'stars', 'regexLenLimit', 'cases'*/],
+    required: ['_id', 'title', 'regex', /*'sampleType',*/ 'ownerId', /*'stars', 'regexLenLimit', 'cases'*/],
     properties: {
       _id: {
         bsonType: 'objectId'
