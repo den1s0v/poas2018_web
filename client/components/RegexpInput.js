@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { hot } from "react-hot-loader/root";
 
-import { InputGroup, Form, FormControl, Row, Col } from "react-bootstrap";
+import { InputGroup, Form, FormControl, Container, Row, Col } from "react-bootstrap";
 
 import { Badge } from "react-bootstrap";
 
@@ -54,6 +54,9 @@ class RegexpInput extends Component {
     const isError = this.state.error_msg !== '';
       
     return (
+			<Container>
+				<Row>
+					<Col md={{span:8, offset:2}}>
       <Form className="re_input" className={isError?"re_error":""}>
         {
           this.props.isEdit ?
@@ -91,6 +94,9 @@ class RegexpInput extends Component {
           </Form.Control.Feedback>
         </Form.Group>
       </Form>
+          </Col>
+        </Row>
+			</Container>
     )
   }
   
