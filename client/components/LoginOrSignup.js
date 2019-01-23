@@ -4,13 +4,17 @@ import Col from 'react-bootstrap/lib/Col'
 import Row from 'react-bootstrap/lib/Row'
 import Form from 'react-bootstrap/lib/Form'
 import Button from 'react-bootstrap/lib/Button'
+import { Redirect } from "react-router-dom"
 
 import { GoogleButton } from "./social-buttons/GoogleButton";
 import { VkButton } from "./social-buttons/VkButton";
 
 export class LoginOrSignup extends Component {
-    constructor(props) {
+  constructor(props) {
         super(props);
+        
+    this.login = this.login.bind(this);
+    this.signup = this.signup.bind(this);
 	}
 	
 	login() {
@@ -38,7 +42,10 @@ export class LoginOrSignup extends Component {
 				} else {
 					//alert("You're log in! :3")
 					localStorage.setItem("userToken", userInfo.token);
-					location.reload(true);
+					// location.reload(true);
+          alert('Logged in. Reload needed...');
+
+          this.props.onLogIn && this.props.onLogIn();
 				}
 			});
 		}
@@ -46,8 +53,8 @@ export class LoginOrSignup extends Component {
 	
 	signup() {
 		
-		const email = document.getElementById("emailSignup").value;
-		const password = document.getElementById("passwordSignup").value;
+		const email = document.getElementById("emailInput").value;
+		const password = document.getElementById("passwordInput").value;
 
 		if ( email == "" || password == "" ) {
 			
@@ -67,9 +74,12 @@ export class LoginOrSignup extends Component {
 					alert(userInfo.error);
 					
 				} else {
-					alert("You're sign up!!! :3")
+					alert("You're sign up!!! \n"+userInfo.token)
 					localStorage.setItem("userToken", userInfo.token);
-					location.reload(true);
+					// location.reload(true);
+          // alert('Signed up. Reload needed...');
+          
+          this.props.onLogIn && this.props.onLogIn();
 				}
 			});
 		}
@@ -80,12 +90,18 @@ export class LoginOrSignup extends Component {
 		return ( 
 		<div>
 			<br />
+        { /* Redirect! */
+          (localStorage.getItem("userToken") !== "null") ?
+          <Redirect from="/login" to="/" />
+          :
+          ''
+        }
 			
 			<Container>
 				<Row>
 					<Col md={{span:6, offset:3}}>
 						<Form>
-						  <Form.Label>Log In</Form.Label>
+						  <Form.Label><b>Перед началом работы войдите или зарегистрируйтесь</b></Form.Label>
 						  <Form.Group>
 							<Form.Label>E-mail</Form.Label>
 							<Form.Control id="emailInput" type="email" placeholder="Ваш e-mail" />	
