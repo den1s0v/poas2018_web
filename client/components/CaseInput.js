@@ -60,7 +60,7 @@ class CaseInput extends Component {
   }
 }
 // export default hot *** CasCaseInput;
-export default CasCaseInput;
+export default CaseInput;
 
 /*
       

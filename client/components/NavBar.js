@@ -1,8 +1,9 @@
 import React from "react";
 import { Nav, Navbar } from "react-bootstrap";
 import { Route, Link } from "react-router-dom"
+// import { Container, Row, Col } from "react-bootstrap";
 
-import { Index } from "./Index";
+import { Logo } from "./Logo";
 
 export function NavBar(props) {
 return (
@@ -11,14 +12,19 @@ return (
       // onMouseOver={()=>{this.style.backgroundColor='#53ea93'}}
       // onMouseOut= {()=>{this.style.backgroundColor=''}}
       >POAS Web</span></Navbar.Brand>
-    <Index />
+    <Logo />
     <span style={{"float":"right"}}>
       <Nav className="mr-auto">
         <Nav.Link>
           <Link to='/'>Начало</Link>
         </Nav.Link>
         <Nav.Link>
-          <Link to='/login/'>Вход</Link>
+          {
+            (localStorage.getItem("userToken") !== "null") ?
+              (<Link to='/' onClick={props.logout} >Выйти</Link>)
+            :
+              (<Link to='/login/'>Вход</Link>)
+          }
         </Nav.Link>
       </Nav>
     </span>
