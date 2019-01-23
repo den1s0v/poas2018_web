@@ -1,5 +1,5 @@
 import React from "react";
-import { Badge } from "react-bootstrap";
+import { Button } from "react-bootstrap";
 
 export function SampleList(props) {
   
@@ -8,14 +8,20 @@ export function SampleList(props) {
    */
   return (
   <>
-    <h2>{props.title} {props.samples && (<sup>({props.samples.length || 0})</sup>)}</h2>
+    <h2>{props.title} {props.samples ? (<sup>({props.samples.length || 0})</sup>) : <i>(Загружаются...)</i>}</h2>
     
-    <ol>
-    
-      <li>пункт 1</li>
-      <li>пункт 2</li>
-    
-    </ol>
+    {props.samples ?
+      (<ol>
+        {
+          props.samples.map( sample => 
+            <li key={sample.obj.regex+sample.obj.title}>
+              <Button variant="outline-info" onClick={()=>alert(sample.obj.regex)}>{sample.obj.title}</Button>
+            </li>
+          )
+        }
+      </ol>)
+    :
+    "ожидание ..."}
   </>
   );
 }

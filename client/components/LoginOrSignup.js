@@ -24,7 +24,7 @@ export class LoginOrSignup extends Component {
 
 		if ( email == "" || password == "" ) {
 			
-			alert("Enter email and password");
+			alert("Введите e-mail и пароль");
 		} else {
 		
 			//alert("Log in...");
@@ -37,14 +37,15 @@ export class LoginOrSignup extends Component {
 			
 				if (userInfo.error) {
 					
-					alert(userInfo.error);
+					alert("Ошибка авторизации:\n" + userInfo.error);
 					
 				} else {
 					//alert("You're log in! :3")
 					localStorage.setItem("userToken", userInfo.token);
 					// location.reload(true);
-          alert('Logged in. Reload needed...');
+          // alert('Logged in. Reload needed...');
 
+          // fire callback
           this.props.onLogIn && this.props.onLogIn();
 				}
 			});
@@ -71,14 +72,15 @@ export class LoginOrSignup extends Component {
 			
 				if (userInfo.error) {
 					
-					alert(userInfo.error);
+					alert("Ошибка регистрации:\n" + userInfo.error);
 					
 				} else {
-					alert("You're sign up!!! \n"+userInfo.token)
+					// alert("You're sign up!!! \n"+userInfo.token)
 					localStorage.setItem("userToken", userInfo.token);
 					// location.reload(true);
           // alert('Signed up. Reload needed...');
           
+          // fire callback
           this.props.onLogIn && this.props.onLogIn();
 				}
 			});
