@@ -1,12 +1,3 @@
-// require("babel-core/register");
-// require("babel-polyfill");
-
-// const schema = require('./schemas/sample-schema');
-// const Model = require('../services/init-model');
-// const objectId = require('mongodb').ObjectID;
-// const { promiseError } = require('../services/error-helper')
-
-// const JSONHeader = new Headers({"Content-Type": "application/json"});
 
 /** работа с Sample на клиентской (браузерной) стороне */
 class SampleData /* extends Model */ {
@@ -39,7 +30,7 @@ class SampleData /* extends Model */ {
     this.obj.cases.splice( insert_index , 0 , new_case_line);
   }
   removeOne(remove_index) {
-    // remove one
+    // remove one case
     this.obj.cases.splice( remove_index , 1 );
   }
 
@@ -61,7 +52,7 @@ class SampleData /* extends Model */ {
     fetch('/api/sample/new', {
       method: 'POST',
       body: JSON.stringify(data),
-      headers: new Headers({"Content-Type": "application/json"})
+      headers: new Headers({"Content-Type": "application/json", "authorization":localStorage.userToken})
     }).then(response => response.json()).then(status => {
       /* console.log */ alert('sendNew():\n' + JSON.stringify(status, null, 2));
     });	
@@ -78,7 +69,7 @@ class SampleData /* extends Model */ {
     fetch('/api/sample/update', {
       method: 'POST',
       body: JSON.stringify(data),
-      headers: new Headers({"Content-Type": "application/json"})
+      headers: new Headers({"Content-Type": "application/json", "authorization":localStorage.userToken})
     }).then(response => response.json()).then(status => {
       /* console.log */ alert(JSON.stringify(status, null, 2));
     });	
@@ -125,14 +116,15 @@ function SampleCase(case_line, dbObj, editableObj) {
 /** returns SampleData[]
 mode: ['all','my','quiz']
 */
-function f_fetchSamples({userId, mode='all'} = {}) {
+function f_fetchSamples(mode='all') {
 	
-  console.log('fetchSamples: options:',{userId, mode});
+  // userId is provided by jwt token
+  // console.log('fetchSamples: options:',{userId, mode});
 
   return fetch('/api/sample/get', {
     method: 'POST',
-    body: JSON.stringify({userId, mode}),
-    headers: /* new Headers( */{"Content-Type": "application/json"} // )
+    body: JSON.stringify({mode}),
+    headers: /* new Headers( */{"Content-Type": "application/json", "authorization":localStorage.userToken} // )
   }).then(response => response.json()).then(samples => {
     // console.log("recieved samples:\n",JSON.stringify(samples, null, 2));
     return samples.map((sample) => new SampleData(sample))

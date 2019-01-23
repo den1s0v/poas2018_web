@@ -56,7 +56,8 @@ async function CreateSample(request, response, next, Sample) {
 }  
 
 async function GetSamples(request, response, next, Sample) {
-  let {userId, mode} = request.body;
+  let userId = request.userId;
+  const {mode} = request.body;
   const valid = ['all','my','quiz', 'done'].includes(mode) && 
 				(mode === 'all' || userId);
   if( ! valid ) {
@@ -64,6 +65,8 @@ async function GetSamples(request, response, next, Sample) {
     response.status(412).json({
       error: "Wrong request options"
     })
+    response.end();
+    return;
   }
   
   if(mode === 'all') userId = null;
@@ -75,7 +78,7 @@ async function GetSamples(request, response, next, Sample) {
       (mode === 'quiz')?
       Sample.getAllUnsolvedSamples(userId)
       :
-      Sample.getAllSolvedSamples(userId) // 'done'
+      Sample.getSolvedSamples(userId) // 'done'
     ); 
   
   const samples = await promise
