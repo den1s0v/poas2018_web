@@ -85,7 +85,8 @@ class CheckLine extends Component {
     )
   }
 }
-export default hot(CheckLine);
+// export default hot(CheckLine);
+export default CheckLine;
 
 /*
 

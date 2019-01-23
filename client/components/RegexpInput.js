@@ -105,7 +105,8 @@ class RegexpInput extends Component {
       </div>
   */
 }
-export default hot(RegexpInput);
+// export default hot(RegexpInput);
+export default RegexpInput;
 
 /*
               <CheckLine {...{isEdit:true,  isOkMatch:true, str:'абвгдiш', mustMatch:true, listIndex:0}} />

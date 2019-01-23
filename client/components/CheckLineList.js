@@ -70,7 +70,8 @@ class CheckLineList extends Component {
     )
   }
 }
-export default hot(CheckLineList);
+// export default hot(CheckLineList);
+export default CheckLineList;
 
 /*
               <CheckLine {...{isEdit:true,  isOkMatch:true, str:'абвгдiш', mustMatch:true, listIndex:0}} />
