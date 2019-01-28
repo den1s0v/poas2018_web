@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { hot } from "react-hot-loader/root";
 import { Button } from "react-bootstrap";
 import { Badge } from "react-bootstrap";
 import { ProgressBar } from "react-bootstrap";
