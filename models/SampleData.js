@@ -125,7 +125,12 @@ function f_fetchSamples(mode='all') {
     method: 'POST',
     body: JSON.stringify({mode}),
     headers: /* new Headers( */{"Content-Type": "application/json", "authorization":localStorage.userToken} // )
-  }).then(response => response.json()).then(samples => {
+  }).then(response => response.json())
+    .then(responseInfo => {
+      if(responseInfo.error) throw responseInfo;
+      else return responseInfo;
+    })
+    .then(samples => {
     // console.log("recieved samples:\n",JSON.stringify(samples, null, 2));
     return samples.map((sample) => new SampleData(sample))
   });

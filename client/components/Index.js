@@ -49,7 +49,13 @@ export class Index extends Component {
           })
           console.log('component Index, Mode "'+key+'":', samples.length,'samples.');
         })
-        .catch((reason) => console.log('isCanceled', reason.isCanceled));
+        .catch((reason) => {
+          if(reason.props && ! reason.props.auth)
+          {
+            this.props.logout();
+          }
+          console.log(reason, 'isCanceled', reason.isCanceled)
+        });
     }
   }
   

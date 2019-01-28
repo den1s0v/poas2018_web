@@ -30,7 +30,7 @@ class App extends Component {
   
 	onLogIn() {
 		// location.reload(true);
-    alert('Logged in. \n'+localStorage.getItem("userToken"));
+    // alert('Logged in. \n'+localStorage.getItem("userToken"));
     
     this.setState({});
 	}
@@ -38,7 +38,7 @@ class App extends Component {
 	logout() {
 		localStorage.setItem("userToken", "null");
 		// location.reload(true);
-    alert('Logged out. \n'+localStorage.getItem("userToken"));
+    // alert('Logged out. \n'+localStorage.getItem("userToken"));
     
     this.setState({});
 	}
@@ -58,7 +58,7 @@ class App extends Component {
         }
         <Route path="/login" exact component={ () => <LoginOrSignup onLogIn={this.onLogIn} />} />
         
-        <Route path="/" exact component={Index} />
+        <Route path="/" exact component={ () => <Index logout={this.logout} />} />
 
         {/* 
         <Route path="/quiz" exact component={ () => 
