@@ -26,9 +26,9 @@ class Sample extends Model {
 
   async save(newSample, UserModel) {
     newSample._id = new objectId();
-// !    newSample.ownerId = new objectId(newSample.userId);
+    newSample.ownerId = new objectId(newSample.ownerId);
 
-    // console.log('inserting Sample:', newSample);
+    console.log('inserting Sample:', newSample);
     
     return this.collection.insertOne(newSample)
       .then(async insertedSample => {
@@ -50,7 +50,7 @@ class Sample extends Model {
     let samples;
     await new Promise((resolve,reject) => {
       // this.collection.find({ ! }).toArray(function(err, docs) {
-      this.collection.find( userId? {ownerId:userId} : {} )
+      this.collection.find( userId? {ownerId:new objectId(userId)} : {} )
       .toArray(function(err, docs) {
         // console.log(' >>>>>>> In .toArray(function(err, docs)) func!')
         docs && resolve(docs) || reject(err);
@@ -94,6 +94,9 @@ class Sample extends Model {
     return samples.toArray();
   }
 
+  async addSolvedUser(sampleId, userId) {
+    return await this.collection.updateOne({ _id: new objectId(sampleId) }, { $push: { doneUsers: new objectId(userId) } });
+  }
 }
 
 module.exports = Model.init('samples', schema, collection => new Sample(collection));

@@ -32,7 +32,6 @@ app.post('/api/signup', validators.signupValidator, UsersController.CreateUser)
 app.post('/api/login', validators.loginValidator, UsersController.Login)
 // app.get('/api/users/:id/:login?', verifyToken) // localhost/api/users/23/test
 app.patch('/api/users/:login', validators.updateValidator, verifyToken, UsersController.UpdateUser)
-// app.post('/api/samples/new', validators.addSampleValidator, verifyToken, SamplesController.CreateSample);
 
 // <debug-test>
 app.get('/test', SamplesController.SampleTestFunc);
@@ -47,12 +46,12 @@ app.post('/api/sample/get',   verifyToken, SamplesController.GetSamples);
 
 app.post('/api/sample/new', verifyToken, validators.addSampleValidator, SamplesController.CreateSample);
 
-// app.post('/api/samples/getUserSamples', verifyToken, SamplesController.GetUserSamples);
-// app.post('/api/samples/getAllUnsolvedTasks', verifyToken, SamplesController.GetAllUnsolvedTasks);
-// app.post('/api/samples/getSolvedTasks', verifyToken, SamplesController.GetSolvedTasks);
+// app.post('/api/sample/getUserSamples', verifyToken, SamplesController.GetUserSamples);
+// app.post('/api/sample/getAllUnsolvedTasks', verifyToken, SamplesController.GetAllUnsolvedTasks);
+// app.post('/api/sample/getSolvedTasks', verifyToken, SamplesController.GetSolvedTasks);
 
-app.post('/api/samples/addSolvedSample', verifyToken, UsersController.AddSolvedSample);
-// app.post('/api/samples/addSolvedUser', verifyToken, SamplesController.AddSolvedSample);
+app.post('/api/sample/add-solved', verifyToken, validators.addSolvedSampleValidator, SamplesController.AddSolved);
+// app.post('/api/sample/addSolvedUser', verifyToken, SamplesController.AddSolvedSample);
 
 
 

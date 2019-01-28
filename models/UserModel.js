@@ -70,11 +70,11 @@ class User extends Model {
   }
 
   async addSample(userId, sampleId) {
-    return await this.collection.updateOne({ _id: new objectId(userId) }, { $push: { samples: sampleId } });
+    return await this.collection.updateOne({ _id: new objectId(userId) }, { $push: { samples: new objectId(sampleId) } });
   }
 
   async addSolvedSample(userId, sampleId) {
-    return await this.collection.updateOne({ _id: new objectId(userId) }, { $push: { doneSamples: sampleId } });
+    return await this.collection.updateOne({ _id: new objectId(userId) }, { $push: { doneSamples: new objectId(sampleId) } });
   }
 }
 

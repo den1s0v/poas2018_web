@@ -25,9 +25,14 @@ const addSampleValidator = validator({
   cases: { type: 'object', required: true }  // `object` is used instead if `array`
 })
 
+const addSolvedSampleValidator = validator({
+  sampleId: { type: 'string', required: true },
+})
+
 module.exports = {
   signupValidator,
   loginValidator,
   updateValidator,
-  addSampleValidator
+  addSampleValidator,
+  addSolvedSampleValidator,
 }

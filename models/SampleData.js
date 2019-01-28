@@ -45,25 +45,47 @@ class SampleData /* extends Model */ {
   
   /** returns boolean */
   /* async */
+  sendSolved() {
+    const data = {sampleId:this.dbObj._id};
+    
+    const promise = fetch('/api/sample/add-solved', {
+      method: 'POST',
+      body: JSON.stringify(data),
+      headers: new Headers({"Content-Type": "application/json", "authorization":localStorage.userToken})
+    });	
+    console.log('sendSolved() has sent ',data);
+
+    return promise;
+  }
+  
+  /** returns boolean */
+  /* async */
   sendNew() {
 	
     const data = this.prepare4Save();
   
-    fetch('/api/sample/new', {
+    const promise = fetch('/api/sample/new', {
       method: 'POST',
       body: JSON.stringify(data),
       headers: new Headers({"Content-Type": "application/json", "authorization":localStorage.userToken})
-    }).then(response => response.json()).then(status => {
-      /* console.log */ alert('sendNew():\n' + JSON.stringify(status, null, 2));
-    });	
-
+    }).then(response => response.json())
+    .then(responseInfo => {
+      if(responseInfo.error) throw responseInfo;
+      else return responseInfo;
+    })
+    // .then(status => {
+      // /* console.log */ alert('sendNew():\n' + JSON.stringify(status, null, 2));
+    // });	
     console.log('sendNew() has sent ',data);
+
+    return promise;
   }
   
   /** returns boolean */
   /* async */
   sendChanges() {
-	
+    throw "Not supported yet.";
+    
     const data = this.prepare4Save();
   
     fetch('/api/sample/update', {
@@ -71,7 +93,7 @@ class SampleData /* extends Model */ {
       body: JSON.stringify(data),
       headers: new Headers({"Content-Type": "application/json", "authorization":localStorage.userToken})
     }).then(response => response.json()).then(status => {
-      /* console.log */ alert(JSON.stringify(status, null, 2));
+      // /* console.log */ alert(JSON.stringify(status, null, 2));
     });	
 
     console.log('we have sent',data);

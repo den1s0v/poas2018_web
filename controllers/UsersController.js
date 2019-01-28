@@ -79,7 +79,8 @@ async function AddSolvedSample(request, response, next, User) {
   await User.addSolvedSample(userId, sampleId).then(result => {
     console.log('Solved sample saved');
     response.json(result.acknowledged);
-    next();
+    // next();
+    response.end();
   })
 }
 

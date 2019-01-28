@@ -14,7 +14,7 @@ module.exports = function validator(schema = {}) {
             ) {
           newBody[key] = request.body[key];
         } else if (schema[key].required) {
-          responseError({ error: "Incorrect request body! Missing required key: "+key, statusCode: 400, response })
+          responseError({ error: "Incorrect request body! Incorrect or missing required key: "+key+" (expected `"+(schema[key].type.toString())+"`)", statusCode: 400, response })
           fail = true;
           break;
         }

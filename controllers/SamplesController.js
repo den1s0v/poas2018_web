@@ -12,6 +12,7 @@ const SampleController = {
   CreateSample,
   GetSamples,
   SaveSample,
+  AddSolved,
 }
 
 injectModelsToActions(SampleController, SampleModel);
@@ -21,18 +22,21 @@ module.exports = SampleController;
 async function SampleTestFunc(request, response, next, Sample) {
   let reply_obj = {};
   // console.log('SampleTestFunc')
-  reply_obj['debug'] = 'SampleTestFunc';
+  // reply_obj['debug'] = 'SampleTestFunc';
   
-  reply_obj['typeof Sample'] = typeof Sample;
+  // reply_obj['typeof Sample'] = typeof Sample;
   
-  let newSample = await Sample.template();
-  let userId = newSample.ownerId;
-  reply_obj['save Sample'] = await Sample.save(newSample, UserModel) // .catch(e => new Error(e));
+  // let newSample = await Sample.template();
+  // let userId = newSample.ownerId;
+  // reply_obj['save Sample'] = await Sample.save(newSample, UserModel) // .catch(e => new Error(e));
   
-  let allSamples = await Sample.allFor(userId).catch(e => allSamples = e.toString());
+  // let allSamples = await Sample.allFor(userId).catch(e => allSamples = e.toString());
   
-  reply_obj['all_Samples . type'] = typeof allSamples;
-  reply_obj['all_Samples'] = allSamples;
+  // reply_obj['all_Samples . type'] = typeof allSamples;
+  // reply_obj['all_Samples'] = allSamples;
+
+  reply_obj['all_Users'] = await UserModel.collection.find({}).toArray();
+  reply_obj['all_Samples'] = await Sample.collection.find({}).toArray();
   
 //  request.body = newSample;
 //  request.userId = userId;
@@ -113,3 +117,18 @@ async function SaveSample(request, response, next, Sample) {
   response.json(status);
   next();
 }
+
+async function AddSolved(request, response, next, Sample) {
+  
+  const sampleId = request.body.sampleId;
+  const userId = request.userId;
+  await Sample.addSolvedUser(sampleId, userId).then(result => {
+    UserModel.addSolvedSample(userId, sampleId).then(result => {
+      console.log('Solved sample saved');
+      response.json(result.acknowledged);
+      // next();
+      response.end();
+    })
+  });
+}
+
