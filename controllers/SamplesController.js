@@ -48,7 +48,7 @@ async function SampleTestFunc(request, response, next, Sample) {
 async function CreateSample(request, response, next, Sample) {
   const newSample = request.body;
   newSample.ownerId = request.userId;
-  await Sample.save(newSample).then(sample => {
+  await Sample.save(newSample,UserModel).then(sample => {
     console.log('The new sample saved to DB!');
     response.json(sample.ops);
     next();
