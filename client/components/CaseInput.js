@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { hot } from "react-hot-loader/root";
 import InputGroup from 'react-bootstrap/lib/InputGroup';
 import Form from 'react-bootstrap/lib/Form';
 import { Button, FormControl } from "react-bootstrap";
@@ -59,7 +58,6 @@ class CaseInput extends Component {
     )
   }
 }
-// export default hot *** CasCaseInput;
 export default CaseInput;
 
 /*

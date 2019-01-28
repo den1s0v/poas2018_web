@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { hot } from "react-hot-loader/root";
 
 import { InputGroup, Form, FormControl, Container, Row, Col } from "react-bootstrap";
 
@@ -105,7 +104,6 @@ class RegexpInput extends Component {
       </div>
   */
 }
-// export default hot(RegexpInput);
 export default RegexpInput;
 
 /*

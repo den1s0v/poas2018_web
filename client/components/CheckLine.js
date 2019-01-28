@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { hot } from "react-hot-loader/root";
 import { Button } from "react-bootstrap";
 import { DropdownButton } from "react-bootstrap";
 import { ToggleButtonGroup, ToggleButton } from "react-bootstrap";
@@ -85,7 +84,6 @@ class CheckLine extends Component {
     )
   }
 }
-// export default hot(CheckLine);
 export default CheckLine;
 
 /*

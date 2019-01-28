@@ -8,10 +8,15 @@ export function SampleList(props) {
    */
   return (
   <>
-    <h2>{props.title} {props.samples ? (<sup>({props.samples.length || 0})</sup>) : <i>(Загружаются...)</i>}</h2>
+    <h2>
+    {props.title}
+    {
+      props.samples ? (<sup>({props.samples.length || 0})</sup>) : <i>(Загружаются ..…)</i>
+    }
+    </h2>
     
     {props.samples ?
-      (<ol>
+      (<ul className="list-inline">
         {
           props.samples.map( sample => 
             <li key={sample.obj.regex+sample.obj.title}>
@@ -19,7 +24,7 @@ export function SampleList(props) {
             </li>
           )
         }
-      </ol>)
+      </ul>)
     :
     "ожидание ..."}
   </>

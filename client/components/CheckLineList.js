@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { hot } from "react-hot-loader/root";
 import { Table } from "react-bootstrap";
 
 // import 'bootstrap/dist/css/bootstrap.css'
@@ -70,7 +69,6 @@ class CheckLineList extends Component {
     )
   }
 }
-// export default hot(CheckLineList);
 export default CheckLineList;
 
 /*
