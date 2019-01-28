@@ -22,7 +22,7 @@ const addSampleValidator = validator({
   title: { type: 'string', required: true },
   regex: { type: 'string', required: true },
   // ownerId: { type: 'string', required: true },
-  cases: { type: 'array', required: true }
+  cases: { type: 'object', required: true }  // `object` is used instead if `array`
 })
 
 module.exports = {
