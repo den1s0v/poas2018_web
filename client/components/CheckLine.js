@@ -78,7 +78,7 @@ class CheckLine extends Component {
               onClick={()=>onCaseAddRemove('insert',listIndex)}
             ><b><big>+</big></b></Button>
           </td>
-        ) : ''}
+        ) : null}
       </tr>
     )
   }

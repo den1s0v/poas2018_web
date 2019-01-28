@@ -81,7 +81,7 @@ export class Index extends Component {
   */  
   
   render() {
-    console.log('component Index render()',this.state)
+    // console.log('component Index render()',this.state)
 
     // подготовить содержимое списков для трёх панелей
     const panels = this.state.current_sample
@@ -165,7 +165,7 @@ export class Index extends Component {
           this.setState({
             [key]:samples
           })
-          console.log('component Index: "'+key+'"', samples.length,'samples.');
+          // console.log('component Index: "'+key+'"', samples.length,'samples.');
         })
         .catch((reason) => {
           if(reason.props && ! reason.props.auth)

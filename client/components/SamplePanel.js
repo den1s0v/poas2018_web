@@ -25,15 +25,13 @@ class SamplePanel extends Component {
     }
     
     this.state = {
-      sample: sample
+      sample: sample,
+      button_blocked: false
     };
-    console.log('component SamplePanel created:', this.state.sample);
-    
-    
   }
 
   onCaseChanged(new_value, case_index) {
-    console.log('component SamplePanel onCaseChanged():', new_value);
+    // console.log('component SamplePanel onCaseChanged():', new_value);
     // set new value !
     const sample = this.state.sample;
     sample.obj.cases[case_index].setStr(new_value);
@@ -82,21 +80,42 @@ class SamplePanel extends Component {
 
   onSaveNew() {
     if(this.state.sample) {
+      // avoid double-clicking
+      this.setState({button_blocked:true});
+      // setTimeout(()=>this.setState({button_blocked:false}) , 1000);
+      
       this.state.sample.sendNew()
       .then(() => this.props.onNewSampleSaved && this.props.onNewSampleSaved())
-      .catch(err => console.log("onSaveNew():", err));
-      
+      .catch((reason) => {
+        if(reason.error)
+        { // ошибка сохранения!
+          alert('Ошибка!\nЗадача не была сохранена по следующей причине:\n'+reason.error+'\n\nЗамечание. Название задачи должно быть уникальным среди всех пользователей.');
+        }
+        console.log("onSaveNew():", reason.error);
+        
+        // reset blocking
+        this.setState({button_blocked:false});
+      });
     }
     else {
-      fetch('/test', {
-        method: 'GET',
-        // headers: new Headers({"Content-Type": "application/json"})
-      }).then(response => response.json()).then(status => {
-        /* console.log */ alert(JSON.stringify(status, null, 2));
-      })
-      // return to list
-      // .then(() => this.props.onNewSampleSaved && this.props.onNewSampleSaved());	
+      // fetch('/test', {
+        // method: 'GET',
+      // }).then(response => response.json()).then(status => {
+        // // /* console.log */ alert(JSON.stringify(status, null, 2));
+      // })
+      
+      // // return to list
+      // // .then(() => this.props.onNewSampleSaved && this.props.onNewSampleSaved());	
     }
+  }
+
+  onSolved() {
+    this.state.sample.sendSolved()
+      .then(() => this.props.onNewSampleSaved && this.props.onNewSampleSaved())
+      .catch(err => console.log("onSolved():", err));
+    
+    // Выдать сообщение
+    alert(`Вы решили эту задачу!\nНазвание: ${ this.state.sample.obj.title}\nВаш ответ: ${ this.state.sample.obj.regex}\nИзначальное RegExp: ${ this.state.sample.dbObj.regex}`);
   }
 
   componentWillReceiveProps(new_props) {
@@ -127,6 +146,7 @@ class SamplePanel extends Component {
       if(progress_percent === 1.0) {
         // !! User Solved this sample !!
         console.log('component SamplePanel render():', "User Solved this sample !!");
+        this.onSolved();
       }
     }
     // console.log('component SamplePanel render():', {sample, cases:sample ? sample.obj.cases : [] });
@@ -171,7 +191,7 @@ class SamplePanel extends Component {
           this.props.isEdit ?
           (<Button variant="success" 
             onClick={this.onSaveNew}
-            disabled={!sample}
+            disabled={ !sample || this.state.button_blocked }
             >Сохранить и завершить редактирование
           </Button>)
           : ''
@@ -183,21 +203,5 @@ class SamplePanel extends Component {
     )
   }
 }
-export default hot(SamplePanel);
+export default SamplePanel;
 
-
-/*
-      <div className="container">
-        <div className="jumbotron">
-          Hello, {"Вася"}
-        </div>
-      </div>
-      
-      <NavBar></NavBar>
-      
-      <Route path="/" exact Component={Index} />
-      <Route path="/login/" exact Component={Login} />
-      <Route path="/users/" exact Component={Users} />
-
-
-*/
