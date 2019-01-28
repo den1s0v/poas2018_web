@@ -22,7 +22,7 @@ export class Index extends Component {
     this.setCurrentOrNull = this.setCurrentOrNull.bind(this);
     this.goToList = this.goToList.bind(this);
     this.newSample = this.newSample.bind(this);
-    this.saveNewSample = this.saveNewSample.bind(this);
+    this.onNewSampleSaved = this.onNewSampleSaved.bind(this);
     
     this.state = {
       // samples arrays
@@ -31,6 +31,7 @@ export class Index extends Component {
       done: null,
       // current shown sample
       current_sample: null,
+      is_sample_new: false,
     };
   }
   
@@ -41,7 +42,11 @@ export class Index extends Component {
   }
 
 	goToList() {
-    this.setCurrentOrNull(null);
+    this.setState({
+      current_sample: null,
+      is_sample_new: false,
+    });
+    // this.setCurrentOrNull(null);
   }
 
 	newSample() {
@@ -50,13 +55,25 @@ export class Index extends Component {
     // const all_samples = [...this.state[quiz],...this.state[my],...this.state[done],];
     console.log(new_sample);
     
-    this.setCurrentOrNull(new_sample);
+    this.setState({
+      current_sample: new_sample,
+      is_sample_new: true,
+    });
+    // this.setCurrentOrNull(new_sample);
   }
 
-	saveNewSample() {
+	onNewSampleSaved() {
     // this.setCurrentOrNull(null);
-    this.state.current_sample.sendNew();
-    this.goToList();
+    // this.state.current_sample.sendNew();
+    this.setState({
+      my: null,
+      current_sample: null,
+      is_sample_new: false,
+    });
+    // this.goToList();
+    
+    // перезагрузить задачи с сервера
+    this.componentDidMount();
   }
 
   /* 
@@ -71,7 +88,8 @@ export class Index extends Component {
     ? 
       null
     :
-      Object.keys(samples_options).map(key => 
+      Object.keys(samples_options)
+      .map(key => 
         <SampleList
           key={samples_options[key].title}
           title={samples_options[key].title}
@@ -92,8 +110,8 @@ export class Index extends Component {
       );
       //  style={{float:"auto"}} 
 
-    return this.state.current_sample ? 
-    (
+    return this.state.current_sample ?
+    (  // режим показа панели задачи
       <>
         <div style={{float:"left"}} >
           <Button variant="outline-info" 
@@ -101,11 +119,20 @@ export class Index extends Component {
             >&lt; Назад</Button>
         </div>
           
-        <SamplePanel sample={ this.state.current_sample } isEdit={true} />
+        <SamplePanel
+          sample={ this.state.current_sample }
+          onNewSampleSaved={ this.onNewSampleSaved }
+          isEdit={ this.state.is_sample_new } />
       </>
     )
     :
-    (
+    (  // режим показа списков задач
+    <>
+      <div className="home_back">
+            <center><h2>
+              Домашняя страница
+            </h2></center>
+      </div>
       <Container>
         <Row>
           <Col md={{span:10, offset:1}}>
@@ -121,6 +148,7 @@ export class Index extends Component {
           </Col>
         </Row>
       </Container>
+    </>
     );
   }
   

@@ -11,8 +11,9 @@ export function SampleList(props) {
     <h2>
     {props.title}
     {
-      props.samples ? (<sup>({props.samples.length || 0})</sup>) : <i>(Загружаются ..…)</i>
+      props.samples ? (<sup>({props.samples.length || 0})</sup>) : <i>(Ждём…)</i>
     }
+    &nbsp;
     {
       props.inHeaderComponent
     }
@@ -24,12 +25,14 @@ export function SampleList(props) {
         (<ul className="list-inline">
           {
             props.samples.map( sample => 
-              <li key={sample.obj.regex+sample.obj.title}>
-                <Button variant="outline-info" disabled={!props.active}
-                  onClick={()=>props.onChoose(sample)}
-                >
-                  {sample.obj.title}
-                </Button>
+              <li className="list-inline-item" key={sample.obj.regex+sample.obj.title}>
+                {
+                  <Button variant="outline-info" disabled={!props.active}
+                    onClick={()=>props.onChoose(sample)}
+                  >
+                    {sample.obj.title}
+                  </Button>
+                }
               </li>
             )
           }
@@ -37,7 +40,7 @@ export function SampleList(props) {
         :
         "Нет ни одной задачи."
       :
-      "ожидание ..."
+      "Загружаются ..."
     }
   </>
   );

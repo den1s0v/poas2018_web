@@ -22,7 +22,6 @@ class CheckLine extends Component {
       onCaseChanged,
       onCaseAddRemove,
       listIndex,
-      // key,
     } = this.props;
     
     const str = case_line.str();

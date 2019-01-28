@@ -48,7 +48,7 @@ class CheckLineList extends Component {
               <th>\</th>
               <th>Проверочная строка</th>
               <th>Совпадение</th>
-              {isEdit ? (<th>Управл.</th>) : ''}
+              {isEdit && (<th>Управл.</th>) /* : '' */}
             </tr>
           </thead>
           <tbody>

@@ -63,7 +63,7 @@ class SamplePanel extends Component {
   }
 
   onSampleChanged(new_value, mode = 'regex') {
-    console.log('component SamplePanel onSampleChanged():', new_value);
+    // // console.log('component SamplePanel onSampleChanged():', new_value);
     if(['regex','title'].includes(mode)) {
       // set new value !
       const sample = this.state.sample;
@@ -80,15 +80,21 @@ class SamplePanel extends Component {
   }
 
   onSaveNew() {
-    if(this.state.sample)
-      this.state.sample.sendNew();
+    if(this.state.sample) {
+      this.state.sample.sendNew()
+      .then(() => this.props.onNewSampleSaved && this.props.onNewSampleSaved())
+      .catch(err => console.log("onSaveNew():", err));
+      
+    }
     else {
       fetch('/test', {
         method: 'GET',
         // headers: new Headers({"Content-Type": "application/json"})
       }).then(response => response.json()).then(status => {
         /* console.log */ alert(JSON.stringify(status, null, 2));
-      });	
+      })
+      // return to list
+      // .then(() => this.props.onNewSampleSaved && this.props.onNewSampleSaved());	
     }
   }
 
