@@ -7,8 +7,8 @@ const signupValidator = validator({
 })
 
 const loginValidator = validator({
-  email: { type: /^\w+\@\w+\.[A-Za-z]{2,5}$/, required: false },
-  password: { type: /^\w+$/, required: true },
+  email: { type: /^[\w-]+\@\w+\.[A-Za-z]{2,5}$/, required: false },
+  password: { type: /^.+$/, required: true },
 })
 
 const updateValidator = validator({
