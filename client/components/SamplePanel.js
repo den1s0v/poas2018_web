@@ -3,6 +3,7 @@ import { hot } from "react-hot-loader/root";
 import { Button } from "react-bootstrap";
 import { Badge } from "react-bootstrap";
 import { ProgressBar } from "react-bootstrap";
+import { Container, Row, Col } from "react-bootstrap";
 
 import CheckLineList  from "./CheckLineList";
 import RegexpInput  from "./RegexpInput";
@@ -137,12 +138,15 @@ class SamplePanel extends Component {
           <sub><Badge variant="info">{this.props.isEdit? "Правка" : "Тест"}</Badge></sub>
         </h4></center>
         
+			<Container>
         <RegexpInput
           isEdit={this.props.isEdit}
           title={sample ? sample.obj.title : 'Please wait...'}
           regex={sample ? sample.obj.regex : 'waiting for data...'}
           onChange={this.onSampleChanged}
         />
+				<Row>
+        <Col md={{span:10, offset:1}}>
         {
           !this.props.isEdit ?
           (<i><p/>Подберите такое регулярное выражение, чтобы тестовые строки <b>правильно</b> совпадали/<u>не</u> совпадали</i>)
@@ -172,6 +176,9 @@ class SamplePanel extends Component {
           </Button>)
           : ''
         }
+        </Col>
+        </Row>
+			</Container>
       </>
     )
   }

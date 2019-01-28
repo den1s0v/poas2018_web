@@ -53,7 +53,6 @@ class RegexpInput extends Component {
     const isError = this.state.error_msg !== '';
       
     return (
-			<Container>
 				<Row>
 					<Col md={{span:8, offset:2}}>
       <Form className="re_input" className={isError?"re_error":""}>
@@ -95,7 +94,6 @@ class RegexpInput extends Component {
       </Form>
           </Col>
         </Row>
-			</Container>
     )
   }
   
