@@ -7,10 +7,6 @@ import { ProgressBar } from "react-bootstrap";
 import CheckLineList  from "./CheckLineList";
 import RegexpInput  from "./RegexpInput";
 
-// const SampleData = require('../../models/SampleData');
-// const makeCancelable = require('../../services/make-promise-cancelable');
-
-
 
 class SamplePanel extends Component {
   constructor(props, context) {

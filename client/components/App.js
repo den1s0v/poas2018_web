@@ -74,30 +74,8 @@ class App extends Component {
     )
   }
   
-  // componentDidMount() {
-    // console.log('component App DidMount');
-    
-    // this.cancelableRecieve = makeCancelable( SampleData.fetchSamples() );
-    // this.cancelableRecieve.promise
-      // .then(samples => {
-        // console.log('component App setState():', samples.length,'samples.');
-        
-        // this.setState({
-          // samples: samples
-        // })
-      // })
-      // .catch((reason) => console.log('isCanceled', reason.isCanceled));
-  // }
-  
-  // componentWillUnmount() {
-    
-    // console.log('component App WillUnmount');
-    // if(this.cancelableRecieve) {
-      // this.cancelableRecieve.cancel();
-    // }
-  // }
 }
-export default hot(App);
+export default hot(App);  // hot() требуется только корневому компоненту (к другим компонентам его нельзя применять. Также нельзя оставлять `import {hot} ...` в других файлах)
 
 
 /*
