@@ -16,12 +16,17 @@ return (
     <span style={{"float":"right"}}>
       <Nav className="mr-auto">
         <Nav.Link>
-          <Link to='/'>Начало</Link>
+          <Link to='/'>В начало</Link>
         </Nav.Link>
         <Nav.Link>
           {
             (localStorage.getItem("userToken") !== "null") ?
-              (<Link to='/' onClick={props.logout} >Выйти</Link>)
+              (
+              <>
+                [ {localStorage.getItem("userEmail")} >
+                <Link to='/' onClick={props.logout} >Выйти</Link> ]
+              </>
+              )
             :
               (<Link to='/login/'>Вход</Link>)
           }

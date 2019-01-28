@@ -24,7 +24,7 @@ export class LoginOrSignup extends Component {
 
 		if ( email == "" || password == "" ) {
 			
-			alert("Введите e-mail и пароль");
+			alert("Введите e-mail и пароль, или залогиньтесь через аккаунт Google");
 		} else {
 		
 			//alert("Log in...");
@@ -46,7 +46,7 @@ export class LoginOrSignup extends Component {
           // alert('Logged in. Reload needed...');
 
           // fire callback
-          this.props.onLogIn && this.props.onLogIn();
+          this.props.onLogIn && this.props.onLogIn(email);
 				}
 			});
 		}
@@ -59,10 +59,10 @@ export class LoginOrSignup extends Component {
 
 		if ( email == "" || password == "" ) {
 			
-			alert("Enter email and password");
+			alert("Введите e-mail и пароль");
 		} else {
 		
-			alert("Sign up...");
+			// alert("Sign up...");
 			fetch('/api/signup', {
 									method: 'POST',
 									body: JSON.stringify({email: email, password: password, isAdmin: false}),
@@ -81,7 +81,7 @@ export class LoginOrSignup extends Component {
           // alert('Signed up. Reload needed...');
           
           // fire callback
-          this.props.onLogIn && this.props.onLogIn();
+          this.props.onLogIn && this.props.onLogIn(email);
 				}
 			});
 		}
@@ -119,7 +119,7 @@ export class LoginOrSignup extends Component {
                   <big>Войти обычным пользователем</big>
                 </Button>
                 <br />
-                <GoogleButton/>
+                <GoogleButton onLogIn={this.props.onLogIn}/>
               </div>
               <div style={{float:"right"}} >
                 <Button variant="primary" onClick={this.signup}>

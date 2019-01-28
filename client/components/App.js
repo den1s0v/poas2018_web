@@ -28,9 +28,10 @@ class App extends Component {
     // };
   }
   
-	onLogIn() {
+	onLogIn(email) {
 		// location.reload(true);
     // alert('Logged in. \n'+localStorage.getItem("userToken"));
+    localStorage.setItem("userEmail", email);
     
     this.setState({});
 	}
