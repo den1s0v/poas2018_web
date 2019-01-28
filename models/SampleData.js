@@ -136,6 +136,24 @@ function f_fetchSamples(mode='all') {
   });
 }
 
+  // !! See also `template` function in 'SampleModel.js'.
+function modelTemplate() {
+  return {
+    // 'title', 'regex', / *'sampleType',* / 'ownerId', 'stars', 'regexLenLimit', 'cases'
+    title: 'Новаярегулярка',
+    regex: 'a*b+c?',
+    // sampleType: ,
+    ownerId: null, // newOwnerId || new objectId(),
+    stars: 1,
+    regexLenLimit: 0, // no limit
+    cases: [{str:'abc'},{str:'ac'},]
+      .map(o => Object.assign(o,{_id:null})),
+  };
+}
+
+SampleData.template = function() {
+  return new SampleData(modelTemplate());
+}
 
 module.exports = {
   SampleData,

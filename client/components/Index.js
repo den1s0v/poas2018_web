@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 // import { Badge } from "react-bootstrap";
+import { Button } from "react-bootstrap";
+import { Container, Row, Col } from "react-bootstrap";
 
 import { SampleList } from "./SampleList";
 import SamplePanel  from "./SamplePanel";
@@ -7,6 +9,11 @@ import SamplePanel  from "./SamplePanel";
 import makeCancelable from '../../services/make-promise-cancelable';
 import SampleData from '../../models/SampleData';
 
+const samples_options = {
+      quiz: {active: true , title:"Нерешенные задачи"},
+        my: {active: false, title:"Мои задачи", newEnabled:true},
+      done: {active: false, title:"Решенные задачи"},
+    };
 
 export class Index extends Component {
   constructor(props, context) {
@@ -15,6 +22,7 @@ export class Index extends Component {
     this.setCurrentOrNull = this.setCurrentOrNull.bind(this);
     this.goToList = this.goToList.bind(this);
     this.newSample = this.newSample.bind(this);
+    this.saveNewSample = this.saveNewSample.bind(this);
     
     this.state = {
       // samples arrays
@@ -36,6 +44,20 @@ export class Index extends Component {
     this.setCurrentOrNull(null);
   }
 
+	newSample() {
+    let new_sample = SampleData.SampleData.template();
+    // // find one existing
+    // const all_samples = [...this.state[quiz],...this.state[my],...this.state[done],];
+    console.log(new_sample);
+    
+    this.setCurrentOrNull(new_sample);
+  }
+
+	saveNewSample() {
+    // this.setCurrentOrNull(null);
+    this.state.current_sample.sendNew();
+    this.goToList();
+  }
 
   /* 
       Current : {this.state.current_sample.obj.title}
@@ -56,6 +78,16 @@ export class Index extends Component {
           active={samples_options[key].active}
           samples={this.state[key]}
           onChoose={this.setCurrentOrNull}
+          inHeaderComponent={
+            (! samples_options[key].newEnabled || ! this.state[key]) // опции или семплов нет 
+            ? null
+            : 
+              <span>
+                <Button variant="outline-success" 
+                    onClick={this.newSample}
+                  >+ Создать…</Button>
+              </span>
+          }
         />
       );
       //  style={{float:"auto"}} 
