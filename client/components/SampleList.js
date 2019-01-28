@@ -13,20 +13,32 @@ export function SampleList(props) {
     {
       props.samples ? (<sup>({props.samples.length || 0})</sup>) : <i>(Загружаются ..…)</i>
     }
+    {
+      props.inHeaderComponent
+    }
     </h2>
     
-    {props.samples ?
-      (<ul className="list-inline">
-        {
-          props.samples.map( sample => 
-            <li key={sample.obj.regex+sample.obj.title}>
-              <Button variant="outline-info" onClick={()=>alert(sample.obj.regex)}>{sample.obj.title}</Button>
-            </li>
-          )
-        }
-      </ul>)
-    :
-    "ожидание ..."}
+    {
+      props.samples ?
+        props.samples.length > 0 ?
+        (<ul className="list-inline">
+          {
+            props.samples.map( sample => 
+              <li key={sample.obj.regex+sample.obj.title}>
+                <Button variant="outline-info" disabled={!props.active}
+                  onClick={()=>props.onChoose(sample)}
+                >
+                  {sample.obj.title}
+                </Button>
+              </li>
+            )
+          }
+        </ul>)
+        :
+        "Нет ни одной задачи."
+      :
+      "ожидание ..."
+    }
   </>
   );
 }

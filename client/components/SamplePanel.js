@@ -126,12 +126,6 @@ class SamplePanel extends Component {
     // <small> </small>
     return (
       <>
-        <div style={{float:"left"}} >
-          <Button variant="outline-info" 
-              onClick={() => alert('Назад !')}
-            >Назад</Button>
-        </div>
-        
         <center><h4>
           {sample && sample.obj.title} &nbsp;
           <sub><Badge variant="info">{this.props.isEdit? "Правка" : "Тест"}</Badge></sub>
