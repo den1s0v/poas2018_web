@@ -83,7 +83,10 @@ class SamplePanel extends Component {
       this.setState({button_blocked:true});
       // setTimeout(()=>this.setState({button_blocked:false}) , 1000);
       
-      this.state.sample.sendNew()
+			(this.props.isExist ?
+					this.state.sample.sendChanges()
+				: this.state.sample.sendNew()
+			)
       .then(() => this.props.onNewSampleSaved && this.props.onNewSampleSaved())
       .catch((reason) => {
         if(reason.error)

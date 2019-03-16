@@ -84,19 +84,23 @@ class SampleData /* extends Model */ {
   /** returns boolean */
   /* async */
   sendChanges() {
-    throw "Not supported yet.";
+    // throw "Not supported yet.";
     
     const data = this.prepare4Save();
   
-    fetch('/api/sample/update', {
+    const promise = fetch('/api/sample/update', {
       method: 'POST',
       body: JSON.stringify(data),
       headers: new Headers({"Content-Type": "application/json", "authorization":localStorage.userToken})
-    }).then(response => response.json()).then(status => {
-      // /* console.log */ alert(JSON.stringify(status, null, 2));
+    }).then(response => response.json())
+    .then(responseInfo => {
+    console.log('sendChanges() responseInfo: ',responseInfo);
+      if(responseInfo.error) throw responseInfo;
+      else return responseInfo;
     });	
 
-    console.log('we have sent',data);
+    console.log('sendChanges() has sent',data);
+    return promise;
   }
 }
 
