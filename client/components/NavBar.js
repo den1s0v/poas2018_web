@@ -21,14 +21,12 @@ return (
         <Nav.Link>
           {
             (localStorage.getItem("userToken") !== "null") ?
-              (
               <>
                 [ {localStorage.getItem("userEmail")} >
                 <Link to='/' onClick={props.logout} >Выйти</Link> ]
               </>
-              )
             :
-              (<Link to='/login/'>Вход</Link>)
+              <Link to='/login/'>Вход</Link>
           }
         </Nav.Link>
       </Nav>

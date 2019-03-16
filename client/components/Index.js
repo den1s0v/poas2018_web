@@ -114,7 +114,7 @@ export class Index extends Component {
     (  // режим показа панели задачи
       <>
         <div style={{float:"left"}} >
-          <Button variant="outline-info" 
+          <Button variant="info" 
               onClick={this.goToList}
             >&lt; Назад</Button>
         </div>

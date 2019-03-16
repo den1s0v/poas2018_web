@@ -69,7 +69,7 @@ class LightServer {
   */
   use(...args) {
     const url = (typeof args[0] === 'string') ? args[0] : 'all';
-    const middleware = args.filter(arg => typeof arg === 'function')
+    const middleware = args.filter(arg => typeof arg === 'function');
     this[requestArray].push({ method: 'all', url, middleware });
   }
 

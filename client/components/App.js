@@ -30,21 +30,21 @@ class App extends Component {
     // };
   }
   
-	onLogIn(email) {
-		// location.reload(true);
+  onLogIn(email) {
+    // location.reload(true);
     // alert('Logged in. \n'+localStorage.getItem("userToken"));
     localStorage.setItem("userEmail", email);
     
     this.setState({});
-	}
+  }
   
-	logout() {
-		localStorage.setItem("userToken", "null");
-		// location.reload(true);
+  logout() {
+    localStorage.setItem("userToken", "null");
+    // location.reload(true);
     // alert('Logged out. \n'+localStorage.getItem("userToken"));
     
     this.setState({});
-	}
+  }
 
   render() {
     // const samples = this.state.samples;
