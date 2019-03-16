@@ -9,6 +9,7 @@ import { NavBar } from "./NavBar";
 import { LoginOrSignup } from "./LoginOrSignup";
 import { Index } from "./Index";
 import SamplePanel  from "./SamplePanel";
+import { Hider } from "./Hider";
 
 console.log('app begin');
 
@@ -20,8 +21,9 @@ class App extends Component {
   constructor(props, context) {
     super(props, context);
 
-    this.onLogIn = this.onLogIn.bind(this);
-    this.logout = this.logout.bind(this);
+    this.onLogIn = this.onLogIn.bind(this); //привязать метод onLogIn к Конкретному Объекту this (т.е. именно к App)
+    this.logout = this.logout.bind(this); //   для обеспечения возможности обращаться к корректному (Нужному) объекту this
+    //это нужно потому, что метод (onLogIn, например) будет подаваться куда-то в качестве callback'a
     
     // this.state = {
       // samples: null
@@ -50,16 +52,22 @@ class App extends Component {
     
     return (
       <>
-        <Route path="/" component={ () => <NavBar logout={this.logout} />} />
+      {/* <Route path="/" component={ () => <NavBar logout={this.logout} />} />   */}
         
+        <Route path="/" component={ 
+            () => <Hider component={ 
+                () => <NavBar logout={this.logout} />
+            } animationType="Collapse" />
+        } />
+
         { /* Redirect! */
           (localStorage.getItem("userToken") === "null") ?
-          <Route path="/" exact component={() => <Redirect from="/" to="/login" />} />
+          <Route exact path="/" component={() => <Redirect from="/" to="/login" />} />
           : ''
         }
-        <Route path="/login" exact component={ () => <LoginOrSignup onLogIn={this.onLogIn} />} />
+        <Route exact path="/login" component={ () => <LoginOrSignup onLogIn={this.onLogIn} />} />
         
-        <Route path="/" exact component={ () => <Index logout={this.logout} />} />
+        <Route exact path="/" component={ () => <Index logout={this.logout} />} />
 
         {/* 
         <Route path="/quiz" exact component={ () => 
