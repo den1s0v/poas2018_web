@@ -42,9 +42,22 @@ class Sample extends Model {
       })
   }
 
-  /*async update({ userId, login }, newUserData) {
+  async update(sampleData) {
+    sampleData._id = new objectId(sampleData._id); //формируем объект
+    sampleData.ownerId = new objectId(sampleData.ownerId); //формируем объект
+
+    console.log('updating Sample:', sampleData);
     
-  } */
+    return this.collection.findOneAndUpdate({ _id : sampleData._id }, { $set: sampleData })
+      .then(async updatedSample => {
+        ///
+        // console.log('{UserModel}:',JSON.stringify(UserModel))
+        // console.log('check UserModel`s type:', typeof UserModel);
+        // console.log('UserModel.addSample:',UserModel.addSample)
+        ///
+        return updatedSample;
+      })
+  }
 
   async allFor(userId) {
     let samples;

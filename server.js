@@ -41,7 +41,7 @@ app.post('/api/auth/google', googleAuthService, UsersController.CreateGoogleUser
 // app.get('/api/auth/vk', vkAuth, sentFakeVkPage /*, UsersController.CreateVkUser*/);
 
 app.post('/api/sample/get',   verifyToken, SamplesController.GetSamples);
-// // app.post('/api/sample/update',verifyToken, SamplesController.SaveSample);
+app.post('/api/sample/update',verifyToken, SamplesController.SaveSample);
 
 
 app.post('/api/sample/new', verifyToken, validators.addSampleValidator, SamplesController.CreateSample);

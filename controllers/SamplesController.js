@@ -54,7 +54,8 @@ async function CreateSample(request, response, next, Sample) {
   newSample.ownerId = request.userId;
   await Sample.save(newSample,UserModel).then(sample => {
     console.log('The new sample saved to DB!');
-    response.json(sample.ops);
+    // response.json(sample.ops);
+    response.json({ok:1});
     next();
   })
 }  
@@ -101,21 +102,14 @@ async function GetSamples(request, response, next, Sample) {
 /** update */
 async function SaveSample(request, response, next, Sample) {
   const data = request.body;
-  // const valid = ['all','my','quiz'].includes(mode) && 
-				// (mode === 'all' || userId);
-  // if( ! valid ) {
-	  // // 412 Precondition Failed («условие ложно»)
-    // response.status(412).json({
-      // error: "Wrong request options"
-    // })
-  // }
+  data.ownerId = request.userId;
+  await Sample.update(data).then(sample => {
+    console.log('The exist sample saved to DB!');
+    // response.json(sample.ops);
+    response.json({ok:1});
   
-  console.log('recieved data:',data);
-  
-  const status = {ok: true};
-    
-  response.json(status);
   next();
+	})
 }
 
 async function AddSolved(request, response, next, Sample) {
