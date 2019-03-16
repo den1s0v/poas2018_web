@@ -11,7 +11,7 @@ import SampleData from '../../models/SampleData';
 
 const samples_options = {
       quiz: {active: true , title:"Нерешенные задачи"},
-        my: {active: false, title:"Мои задачи", newEnabled:true},
+        my: {active: true, title:"Мои задачи", newEnabled:true, editable : true},
       done: {active: false, title:"Решенные задачи"},
     };
 
@@ -22,6 +22,7 @@ export class Index extends Component {
     this.setCurrentOrNull = this.setCurrentOrNull.bind(this);
     this.goToList = this.goToList.bind(this);
     this.newSample = this.newSample.bind(this);
+    this.editSample = this.editSample.bind(this);
     this.onNewSampleSaved = this.onNewSampleSaved.bind(this);
     
     this.state = {
@@ -32,6 +33,7 @@ export class Index extends Component {
       // current shown sample
       current_sample: null,
       is_sample_new: false,
+			is_edit_sample: false,
     };
   }
   
@@ -48,6 +50,14 @@ export class Index extends Component {
     });
     // this.setCurrentOrNull(null);
   }
+
+	editSample(sample) {
+    this.setState({
+      current_sample: sample,
+      is_sample_new: false,
+      is_edit_sample: true,
+    });		
+	}
 
 	newSample() {
     let new_sample = SampleData.SampleData.template();
@@ -94,8 +104,10 @@ export class Index extends Component {
           key={samples_options[key].title}
           title={samples_options[key].title}
           active={samples_options[key].active}
+          editable={samples_options[key].editable}
           samples={this.state[key]}
           onChoose={this.setCurrentOrNull}
+          onEdit={this.editSample}
           inHeaderComponent={
             (! samples_options[key].newEnabled || ! this.state[key]) // опции или семплов нет 
             ? null
@@ -122,7 +134,8 @@ export class Index extends Component {
         <SamplePanel
           sample={ this.state.current_sample }
           onNewSampleSaved={ this.onNewSampleSaved }
-          isEdit={ this.state.is_sample_new } />
+          isEdit={ this.state.is_sample_new || this.state.is_edit_sample}
+          isExist={ this.state.is_edit_sample } />
       </>
     )
     :

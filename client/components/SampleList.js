@@ -1,5 +1,5 @@
 import React from "react";
-import { Button } from "react-bootstrap";
+import { Button, Badge } from "react-bootstrap";
 
 export function SampleList(props) {
   
@@ -27,11 +27,22 @@ export function SampleList(props) {
             props.samples.map( sample => 
               <li className="list-inline-item" key={sample.obj.regex+sample.obj.title}>
                 {
+                  ! props.editable ?
                   <Button variant="outline-info" disabled={!props.active}
-                    onClick={()=>props.onChoose(sample)}
-                  >
+                    onClick={()=>props.onChoose(sample)} >
                     {sample.obj.title}
                   </Button>
+                  :
+                  <Badge variant="success">
+                    {sample.obj.title + " "}
+                    { props.editable &&
+                      [ <>&nbsp;&nbsp;</> ,
+                          <Button variant="primary" onClick={()=>props.onEdit(sample)}>
+                            <span className='fa fa-edit'/>
+                          </Button>
+                      ]
+                    }
+                  </Badge>
                 }
               </li>
             )
